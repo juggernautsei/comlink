@@ -1,1 +1,1 @@
-Comlink Module v1.0.0
+Comlink Medical Devices Module v1.0.0
