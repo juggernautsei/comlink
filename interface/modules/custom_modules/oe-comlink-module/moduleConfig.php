@@ -10,4 +10,8 @@
  *
  */
 
+namespace OpenEMR\Modules\Comlink;
 
+$module_config = 1;
+
+require_once('setup.php');
