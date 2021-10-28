@@ -2,13 +2,13 @@
 
 namespace OpenEMR\Modules\Comlink;
 
-use OpenEMR\Modules\LifeMesh\Database;
-
+require_once "Database.php";
 
 /**
  * Class Container
  * @package OpenEMR\Modules\Comlink
  */
+
 class Container
 {
     /**
