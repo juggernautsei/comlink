@@ -10,9 +10,9 @@ use OpenEMR\Core\Header;
 <!DOCTYPE html>
 
 <head>
-    <?php Header::setupHeader(); ?>
+    <?php Header::setupHeader(['report-helper','common']); ?>
     <meta charset="utf-8" />
-    <title>Patient Monitoring</title>
+    <title><?php echo xlt('Patient Monitoring');?></title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js">
     </script>
@@ -186,10 +186,19 @@ use OpenEMR\Core\Header;
     }
     </style>
 
-</head>
+<script>
+    function add_patient(){
+        var url = 'form/add_patient.php';
+        dlgopen(url, '_blank', 620, 360,'','Add Patient');
+    }
+</script>
 
-<body>
-    <div id="container_div" class="mt-3">
+</head>
+<body class="body_top">
+<div>
+<a href="#" class="btn btn-secondary" onclick="add_patient()" style="margin-top:10px;"><i class="fa fa-plus"><?php echo xlt(' Add Patients'); ?></i></a>
+</div>
+<div id="container_div" class="mt-3">
         <div class="w-100">
             <div class="jumbotron mt-3 p-4">
                 <div id="dynamic">
@@ -219,7 +228,7 @@ use OpenEMR\Core\Header;
                 </div>
             </div>
         </div>
-    </div>
+</div>
 </body>
 <script>
 $(document).ready(function() {
