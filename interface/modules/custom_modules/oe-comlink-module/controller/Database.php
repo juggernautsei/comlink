@@ -65,4 +65,33 @@ class Database
             return "exist";
         }
     }
+    /**
+     * @return array
+     */
+    public function getFacilities()
+    {
+        $sql = "select id, name from facility";
+        $list = sqlStatement($sql);
+        $facilities_list = [];
+        while ($row = sqlFetchArray($list)) {
+            $facilities_list[] = $row;
+        }
+        return $facilities_list;
+    }
+    
+      /**
+     * @return array
+     */
+    public function getProviders()
+    {
+        $sql = "SELECT id, fname, lname FROM users WHERE authorized=1 AND active ='1'";
+        $list = sqlStatement($sql);
+        $providers_list = [];
+        while ($row = sqlFetchArray($list)) {
+            $providers_list[] = $row;
+        }
+
+        return $providers_list;
+    }
+
 }
