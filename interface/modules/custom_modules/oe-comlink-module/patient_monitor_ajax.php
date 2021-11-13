@@ -12,16 +12,16 @@ while ($row = sqlFetchArray($res)) {
     $res2 = sqlStatement($query2);
     while ($row2 = sqlFetchArray($res2)) {
         $dataarray['data'][$i] =  [
-            $row2['fname'] . $row2['lname'] . $row2['mname'],
+            '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>',
             $row2['DOB'],
             $row['pid'],
-            $row['height'],
+            '',
             $row['bp_upper'],
             $row['temp_upper'],
             $row['bs_upper'],
             $row['resp_upper'],
             // $row['weight'],
-            $row['pm_id'],
+            '',
             $row['oxy_upper'],
             $row['weight'],
             $row['height'],

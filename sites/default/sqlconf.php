@@ -7,8 +7,8 @@ $disable_utf8_flag = false;
 
 $host	= 'localhost';
 $port	= '3306';
-$login	= 'comlink';
-$pass	= 'B784qW26uXjBEDT!#$';
+$login	= 'root';
+$pass	= '';
 $dbase	= 'comlink';
 $db_encoding	= 'utf8mb4';
 
@@ -29,4 +29,3 @@ $config = 1; /////////////
 //////////////////////////
 //////////////////////////
 //////////////////////////
-?>
