@@ -9,7 +9,8 @@ use OpenEMR\Common\Csrf\CsrfUtils;
 
 $container = new Container();
 $loadDb = $container->getDatabase();
-
+$facilities = $loadDb->getFacilities();
+$providers = $loadDb->getProviders();
 
 ?>
 <!DOCTYPE html>
@@ -59,6 +60,34 @@ $loadDb = $container->getDatabase();
 <body>
     <form role="form" method='post'>
         <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
+    
+            
+        <div class="form-row mx-2 mt-4 pt-4">
+           <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Facility'); ?>:</label>
+                <select class='form-control' name='facility' id='facility'>
+                    <?php 
+                    foreach($facilities as $facility) {
+                        echo "<option value='".$facility['id']."'>".$facility['name']."</option>";
+                    }              
+                    ?>
+                </select>
+            </div>
+            <div class="col-sm form-group">
+                <label for='form_title'><?php echo xlt('Provider'); ?>:</label>
+                <select class='form-control' name='provider' id='provider'>
+                    <?php 
+                    foreach($providers as $provider) {
+                        if($provider['fname']){
+                            echo "<option value='".$provider['id']."'>".$provider['lname'].", ".$provider['fname']."</option>";
+                        }else{
+                            echo "<option value='".$provider['id']."'>".$provider['lname']."</option>";
+                        }   
+                    }              
+                    ?>
+                </select>
+            </div> 
+        </div>
         <?php
         $id = $_GET['pid'];
         $sql = 'SELECT * FROM `patient_monitoring_form` WHERE pid=' . $id;
@@ -74,14 +103,14 @@ $loadDb = $container->getDatabase();
                 <input class='form-control' type='hidden' name='pid' id='pid' autocomplete="off"
                     value='<?php echo $id; ?>' />
                 <input class='form-control' type='text' name='weight' id='weight' autocomplete="off"
-                    value='<?php echo $row['weight'] ?>' placeholder='<?php echo xla('Enter Weight'); ?>' />
+                    value='<?php echo $row['weight']; ?>' placeholder='<?php echo xla('Enter Weight'); ?>' />
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
                     <label for='form_facility'><?php echo xlt('height'); ?>:</label>
 
                     <input class='form-control' type='text' name='height' id='height' autocomplete="off"
-                        value='<?php echo $row['height'] ?>' placeholder='<?php echo xla('Enter Height'); ?>' />
+                        value='<?php echo $row['height']; ?>' placeholder='<?php echo xla('Enter Height'); ?>' />
                 </div>
             </div>
             <div class="col-sm form-group">
@@ -89,7 +118,7 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Blood Pressure Upper'); ?>:</label>
 
                     <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off"
-                        value='<?php echo $row['bp_upper'] ?>'
+                        value='<?php echo $row['bp_upper']; ?>'
                         placeholder='<?php echo xla('Enter Blood Pressure'); ?>' />
                 </div>
             </div>
@@ -99,7 +128,7 @@ $loadDb = $container->getDatabase();
                 <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
-                    value='<?php echo $row['bp_lower'] ?>'
+                    value='<?php echo $row['bp_lower']; ?>'
                     placeholder='<?php echo xla('Enter Blood Pressure Lower'); ?>' />
             </div>
             <div class="col-sm form-group">
@@ -107,7 +136,7 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Temprature Upper'); ?>:</label>
 
                     <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
-                        value='<?php echo $row['temp_upper'] ?>'
+                        value='<?php echo $row['temp_upper']; ?>'
                         placeholder='<?php echo xla('Enter Temprature Upper'); ?>' />
                 </div>
             </div>
@@ -116,7 +145,7 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Temprature Lower'); ?>:</label>
 
                     <input class='form-control' type='text' name='temp_lower' id='temp_lower' autocomplete="off"
-                        value='<?php echo $row['temp_lower'] ?>'
+                        value='<?php echo $row['temp_lower']; ?>'
                         placeholder='<?php echo xla('Enter Temprature Lower'); ?>' />
                 </div>
             </div>
@@ -126,7 +155,7 @@ $loadDb = $container->getDatabase();
                 <label for='form_facility'><?php echo xlt('Blood Sugar Upper'); ?>:</label>
 
                 <input class='form-control' type='text' name='bs_upper' id='bs_upper' autocomplete="off"
-                    value='<?php echo $row['bs_upper'] ?>'
+                    value='<?php echo $row['bs_upper']; ?>'
                     placeholder='<?php echo xla('Enter Blood Sugar Upper'); ?>' />
             </div>
             <div class="col-sm form-group">
@@ -134,7 +163,7 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Blood Sugar Lower'); ?>:</label>
 
                     <input class='form-control' type='text' name='bs_lower' id='bs_lower' autocomplete="off"
-                        value='<?php echo $row['bs_lower'] ?>'
+                        value='<?php echo $row['bs_lower']; ?>'
                         placeholder='<?php echo xla('Enter Blood Sugar Lower'); ?>' />
                 </div>
             </div>
@@ -143,7 +172,7 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Respiratory Upper'); ?>:</label>
 
                     <input class='form-control' type='text' name='resp_upper' id='resp_upper' autocomplete="off"
-                        value='<?php echo $row['resp_upper'] ?>'
+                        value='<?php echo $row['resp_upper']; ?>'
                         placeholder='<?php echo xla('Enter Respiratory Upper'); ?>' />
                 </div>
             </div>
@@ -181,14 +210,14 @@ $loadDb = $container->getDatabase();
                     <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
 
                     <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
-                        value='<?php echo $row['pain_upper'] ?>' placeholder='<?php echo xla('Enter Pain Upper'); ?>' />
+                        value='<?php echo $row['pain_upper']; ?>' placeholder='<?php echo xla('Enter Pain Upper'); ?>' />
                 </div>
             </div>
             <div class="col-sm form-group">
                 <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
-                    value='<?php echo $row['pain_lower'] ?>' placeholder='<?php echo xla('Enter Pain Lower'); ?>' />
+                    value='<?php echo $row['pain_lower']; ?>' placeholder='<?php echo xla('Enter Pain Lower'); ?>' />
             </div>
         </div>
 

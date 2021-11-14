@@ -5,12 +5,15 @@ require_once dirname(__FILE__, 2)."/controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Core\Header;
+use OpenEMR\Common\Csrf\CsrfUtils;
 
 $container = new Container();
 $loadDb = $container->getDatabase();
 
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
+$patients = $loadDb->getpatientdata();
+// print_r($patient);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
@@ -81,10 +84,11 @@ if($_POST){
 </head>
 <body >
 <form role="form" method='post' name='theform' id='theform' action='add_patient.php'>
+     <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
     <div class="form-row mx-2">
         <div class="col-sm form-group">
             <label for='form_facility'><?php echo xlt('Facility'); ?>:</label>
-            <select class='form-control' name='form_category' id='form_category'>
+            <select class='form-control' name='facility' id='facility'>
                 <?php 
                 foreach($facilities as $facility) {
                     echo "<option value='".$facility['id']."'>".$facility['name']."</option>";
@@ -94,7 +98,7 @@ if($_POST){
         </div>
         <div class="col-sm form-group">
             <label for='form_title'><?php echo xlt('Provider'); ?>:</label>
-            <select class='form-control' name='form_provider' id='form_provider'>
+            <select class='form-control' name='provider' id='provider'>
                 <?php 
                 foreach($providers as $provider) {
                     if($provider['fname']){
@@ -106,33 +110,182 @@ if($_POST){
                 ?>
             </select>
         </div>
-    </div>
-    <div class="form-row mx-2">
         <div class="col-sm form-group">
-            <label for="form_patient"><?php echo xlt('Patient'); ?>:</label><br>
-            <div class="jumbotron jumbotron-fluid py-2" style="border-radius:5px;padding:10px;margin:0px;">
-            <div>
-            <label for="form_search" style="float:left;margin-top: 1%;"><?php echo xlt('Search By '); ?>:</label>
-            <select class='form-control' name='form_search' id='form_search' onchange="onChange()"style="float:left;width:25%;margin: 0 0 1% 1%;">
-                <option value="name">Name</option>
-                <option value="pid">ID</option>
+            <label for='form_title'><?php echo xlt('Select Patient'); ?>:</label>
+            <select class='form-control' name='pid' id='pid'>
+                
+                <?php 
+                foreach($patients as $patient) {
+                     echo "<option value='".$patient['pid']."'>".$patient['lname']."</option>";
+                   
+                }              
+                ?>
             </select>
-            <input class='form-control' type='text' name='search_name' id="search_name"  style="float:left;margin: 0 0 1% 1%;width:40%;" autocomplete="off" placeholder='<?php echo xla('Search here'); ?>' />
-            </div>
-            <input class="btn btn-secondary btn-save" type="button" id="select"  style="float:left;margin: 0 0 1% 1%;width:15%;" value="Select" onclick="addName()">
-            <input class='form-control' type='text' name='form_patient' id="form_patient" placeholder='<?php echo xla('Patient Name'); ?>' disabled />
-            <input type="hidden" name="form_dob" id="form_dob">
-            </div>
-
         </div>
     </div>
+    <div class="form-row mx-2 mt-4 pt-4">
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Weight'); ?>:</label>
+                
+                <input class='form-control' type='text' name='weight' id='weight' autocomplete="off"
+                     placeholder='<?php echo xla('Enter Weight'); ?>' />
+            </div>
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('height'); ?>:</label>
+
+                    <input class='form-control' type='text' name='height' id='height' autocomplete="off"
+                         placeholder='<?php echo xla('Enter Height'); ?>' />
+                </div>
+            </div>
+        </div>
+        <div class="form-row mx-2">
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Blood Pressure Upper'); ?>:</label>
+
+                    <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off"
+                        
+                        placeholder='<?php echo xla('Enter Blood Pressure'); ?>' value="0"/>
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
+
+                <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Blood Pressure Lower'); ?>' value="0"/>
+            </div>
+            
+        </div>
+        <div class="form-row mx-2">
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Temprature Upper'); ?>:</label>
+
+                    <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
+                        
+                        placeholder='<?php echo xla('Enter Temprature Upper'); ?>' />
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Temprature Lower'); ?>:</label>
+
+                    <input class='form-control' type='text' name='temp_lower' id='temp_lower' autocomplete="off"
+                       
+                        placeholder='<?php echo xla('Enter Temprature Lower'); ?>' />
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-row mx-2">
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Blood Sugar Upper'); ?>:</label>
+
+                <input class='form-control' type='text' name='bs_upper' id='bs_upper' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Blood Sugar Upper'); ?>' />
+            </div>
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Blood Sugar Lower'); ?>:</label>
+
+                    <input class='form-control' type='text' name='bs_lower' id='bs_lower' autocomplete="off"
+                        
+                        placeholder='<?php echo xla('Enter Blood Sugar Lower'); ?>' />
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-row mx-2">
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Respiratory Upper'); ?>:</label>
+
+                    <input class='form-control' type='text' name='resp_upper' id='resp_upper' autocomplete="off"
+                        
+                        placeholder='<?php echo xla('Enter Respiratory Upper'); ?>' />
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Respiratory Lower'); ?>:</label>
+
+                <input class='form-control' type='text' name='resp_lower' id='resp_lower' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Respiratory Lower'); ?>' />
+            </div>
+            
+        </div>
+        <div class="form-row mx-2">
+             <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Oxygen Upper'); ?>:</label>
+
+                    <input class='form-control' type='text' name='oxy_upper' id='oxy_upper' autocomplete="off"
+                      
+                        placeholder='<?php echo xla('Enter Oxygen Upper'); ?>' />
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Oxygen Lower'); ?>:</label>
+
+                    <input class='form-control' type='text' name='oxy_lower' id='oxy_lower' autocomplete="off"
+                        
+                        placeholder='<?php echo xla('Enter Oxygen Lower'); ?>' />
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-row mx-2">
+              <div class="col-sm form-group">
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
+
+                    <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
+                        placeholder='<?php echo xla('Enter Pain Upper'); ?>' value="0"/>
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
+
+                <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
+                     placeholder='<?php echo xla('Enter Pain Lower'); ?>' value="0"/>
+            </div>
+            
+        </div>
+    
+       
+           
     <div class="form-row mx-2 mt-3">
-        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="form_save" id="form_save" value="Add Patient">
+        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="submit" name="form_save" id="form_save" value="Add Patient">
         <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type="button" id="cancel" onclick="dlgclose()" value="Cancel">
     </div>
 </form>
 </body>
 <script>
+$(function() {
+    $('form').on('submit', function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: 'add_patient_save.php',
+            data: $('form').serialize(),
+            error: function(xhr, status, error) {
+                alert(error);
+            },
+            success: function(results) {
+                alert(results);
+                location.reload();
+            }
+        });
+
+    });
+
+});
 function autocomplete(inp, arr) {
   var currentFocus;
   

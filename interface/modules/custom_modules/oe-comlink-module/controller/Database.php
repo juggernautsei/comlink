@@ -25,6 +25,8 @@ class Database
             `id`            int         NOT NULL primary key AUTO_INCREMENT comment 'Primary Key',
             `pid`        bigint(11)     NOT NULL UNIQUE comment 'Patient ID',
             `pm_id`    int(50) NOT NULL comment 'patient monitoring ID',
+            `facility`    VARCHAR(255)    DEFAULT NULL,
+            `provider`    VARCHAR(255)    DEFAULT NULL,
             `weight`  float(5,2)    DEFAULT NULL,
             `height`   float(5,2)    DEFAULT NULL,
             `bp_upper`  VARCHAR(255)    DEFAULT NULL,
@@ -84,7 +86,18 @@ class Database
      */
     public function getProviders()
     {
-        $sql = "SELECT id, fname, lname FROM users WHERE authorized=1 AND active ='1'";
+        $sql = "SELECT id, fname, lname FROM users WHERE active ='1'";
+        $list = sqlStatement($sql);
+        $providers_list = [];
+        while ($row = sqlFetchArray($list)) {
+            $providers_list[] = $row;
+        }
+
+        return $providers_list;
+    }
+    public function getpatientdata()
+    {
+        $sql = "SELECT id, fname, lname,pid FROM patient_data";
         $list = sqlStatement($sql);
         $providers_list = [];
         while ($row = sqlFetchArray($list)) {
