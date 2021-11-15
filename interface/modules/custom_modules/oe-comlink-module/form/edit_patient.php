@@ -224,7 +224,7 @@ $providers = $loadDb->getProviders();
 
                    <select class='form-control' name='alert' id='alert'>
                        <option value="Monitored">Monitored</option> 
-                       <option value="Need Attantion">Need Attantion</option> 
+                       <option value="Need Attention">Need Attention</option> 
                       
                     </select>
                 </div>
