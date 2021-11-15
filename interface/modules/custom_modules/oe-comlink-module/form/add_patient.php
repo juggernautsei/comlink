@@ -161,7 +161,7 @@ if($_POST){
 
                 <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
                     
-                    placeholder='<?php echo xla('Enter Temprature Upper'); ?>' />
+                    placeholder='<?php echo xla('Enter Temprature Upper'); ?>' value="0"/>
             </div>
         </div>
         <div class="col-sm form-group">
