@@ -223,8 +223,9 @@ $providers = $loadDb->getProviders();
                     <label for='form_facility'><?php echo xlt(' Select Alert Message'); ?>:</label>
 
                    <select class='form-control' name='alert' id='alert'>
-                       <option value="Monitored">Monitored</option> 
-                       <option value="Need Attention">Need Attention</option> 
+                       <?php $active=$row['alert'];?>
+                       <option value="Monitored" <?php if($active =="Monitored"){echo 'selected';}?>>Monitored</option> 
+                       <option value="Need Attention" <?php if($active =="Need Attention"){echo 'selected';}?>>Need Attention</option> 
                       
                     </select>
                 </div>
