@@ -41,6 +41,7 @@ class Database
             `oxy_lower`    float(5,2)    DEFAULT NULL,
             `pain_upper`    VARCHAR(255)    DEFAULT NULL,
             `pain_lower`    VARCHAR(255)    DEFAULT NULL,
+            `alert`    VARCHAR(255)    DEFAULT NULL,
             `updatedAt`     DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
         DB;

@@ -36,7 +36,7 @@ $oxy_upper=$_POST['oxy_upper'];
 $oxy_lower=$_POST['oxy_lower'];
 $pain_upper=$_POST['pain_upper'];
 $pain_lower=$_POST['pain_lower'];
-
+$active=$_POST['alert'];
 $count =sqlQuery("SELECT COUNT(*) FROM `patient_monitoring_form` Where pid = '$pid'");
 
 
@@ -44,10 +44,10 @@ if($count['COUNT(*)'] > 0){
     echo "Patient Already Exist !!!";
     
 }else{
-    sqlQuery("INSERT INTO `patient_monitoring_form` (`id`, `pid`, `facility`,`provider`,`pm_id`, `weight`, `height`, `bp_upper`, `bp_lower`, `temp_upper`, `temp_lower`, `bs_upper`, `bs_lower`, `resp_upper`, `resp_lower`, `oxy_upper`, `oxy_lower`, `pain_upper`, `pain_lower`, `updatedAt`) VALUES
-            ('','$pid','$facility','$provider','1234','$weight','$height','$bp_upper', '$bp_lower', '$temp_upper', '$temp_lower', '$bs_upper', '$bs_lower', '$resp_upper', '$resp_lower', '$oxy_upper', '$oxy_lower','$pain_upper', '$pain_lower','$date')");
+    sqlQuery("INSERT INTO `patient_monitoring_form` (`id`, `pid`, `facility`,`provider`,`pm_id`, `weight`, `height`, `bp_upper`, `bp_lower`, `temp_upper`, `temp_lower`, `bs_upper`, `bs_lower`, `resp_upper`, `resp_lower`, `oxy_upper`, `oxy_lower`, `pain_upper`, `pain_lower`, `alert`, `updatedAt`) VALUES
+            ('','$pid','$facility','$provider','1234','$weight','$height','$bp_upper', '$bp_lower', '$temp_upper', '$temp_lower', '$bs_upper', '$bs_lower', '$resp_upper', '$resp_lower', '$oxy_upper', '$oxy_lower','$pain_upper', '$pain_lower','$active','$date')");
 
-    echo "Success Update Record !!!";
+    echo "Success Insert New  Record !!!";
     
 }
 

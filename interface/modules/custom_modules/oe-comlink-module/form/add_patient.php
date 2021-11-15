@@ -123,140 +123,143 @@ if($_POST){
             </select>
         </div>
     </div>
-    <div class="form-row mx-2 mt-4 pt-4">
+    <div class="form-row mx-2">
+        <div class="col-sm form-group">
+            <label for='form_facility'><?php echo xlt('Weight'); ?>:</label>
+            
+            <input class='form-control' type='text' name='weight' id='weight' autocomplete="off"
+                    placeholder='<?php echo xla('Enter Your Weight'); ?>' value="0"/>
+        </div>
+        <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Weight'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('height'); ?>:</label>
+
+                <input class='form-control' type='text' name='height' id='height' autocomplete="off"
+                        placeholder='<?php echo xla('Enter Your Height'); ?>' value="0"/>
+            </div>
+        </div>
+        <div class="col-sm form-group">
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Blood Pressure Upper'); ?>:</label>
+
+                <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off" placeholder='<?php echo xla('Enter Blood Pressure'); ?>'/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row mx-2">
+        <div class="col-sm form-group">
+            <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
+
+            <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
                 
-                <input class='form-control' type='text' name='weight' id='weight' autocomplete="off"
-                     placeholder='<?php echo xla('Enter Weight'); ?>' />
-            </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('height'); ?>:</label>
-
-                    <input class='form-control' type='text' name='height' id='height' autocomplete="off"
-                         placeholder='<?php echo xla('Enter Height'); ?>' />
-                </div>
-            </div>
+                placeholder='<?php echo xla('Enter Blood Pressure Lower'); ?>' value="0"/>
         </div>
-        <div class="form-row mx-2">
+         <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Blood Pressure Upper'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Temprature Upper'); ?>:</label>
 
-                    <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off"
-                        
-                        placeholder='<?php echo xla('Enter Blood Pressure'); ?>' value="0"/>
-                </div>
-            </div>
-            <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
-
-                <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
+                <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
                     
-                    placeholder='<?php echo xla('Enter Blood Pressure Lower'); ?>' value="0"/>
+                    placeholder='<?php echo xla('Enter Temprature Upper'); ?>' />
             </div>
-            
         </div>
-        <div class="form-row mx-2">
+        <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Temprature Upper'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Temprature Lower'); ?>:</label>
 
-                    <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
-                        
-                        placeholder='<?php echo xla('Enter Temprature Upper'); ?>' />
-                </div>
-            </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Temprature Lower'); ?>:</label>
-
-                    <input class='form-control' type='text' name='temp_lower' id='temp_lower' autocomplete="off"
-                       
-                        placeholder='<?php echo xla('Enter Temprature Lower'); ?>' />
-                </div>
-            </div>
-            
-        </div>
-        <div class="form-row mx-2">
-            <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Blood Sugar Upper'); ?>:</label>
-
-                <input class='form-control' type='text' name='bs_upper' id='bs_upper' autocomplete="off"
+                <input class='form-control' type='text' name='temp_lower' id='temp_lower' autocomplete="off"
                     
-                    placeholder='<?php echo xla('Enter Blood Sugar Upper'); ?>' />
+                    placeholder='<?php echo xla('Enter Temprature Lower'); ?>' />
             </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Blood Sugar Lower'); ?>:</label>
-
-                    <input class='form-control' type='text' name='bs_lower' id='bs_lower' autocomplete="off"
-                        
-                        placeholder='<?php echo xla('Enter Blood Sugar Lower'); ?>' />
-                </div>
-            </div>
-            
         </div>
-        <div class="form-row mx-2">
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Respiratory Upper'); ?>:</label>
+    </div>
+       
+    <div class="form-row mx-2">
+        <div class="col-sm form-group">
+            <label for='form_facility'><?php echo xlt('Blood Sugar Upper'); ?>:</label>
 
-                    <input class='form-control' type='text' name='resp_upper' id='resp_upper' autocomplete="off"
-                        
-                        placeholder='<?php echo xla('Enter Respiratory Upper'); ?>' />
-                </div>
-            </div>
+            <input class='form-control' type='text' name='bs_upper' id='bs_upper' autocomplete="off"
+                
+                placeholder='<?php echo xla('Enter Blood Sugar Upper'); ?>' />
+        </div>
+        <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Respiratory Lower'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Blood Sugar Lower'); ?>:</label>
 
-                <input class='form-control' type='text' name='resp_lower' id='resp_lower' autocomplete="off"
+                <input class='form-control' type='text' name='bs_lower' id='bs_lower' autocomplete="off"
                     
-                    placeholder='<?php echo xla('Enter Respiratory Lower'); ?>' />
+                    placeholder='<?php echo xla('Enter Blood Sugar Lower'); ?>' />
             </div>
-            
         </div>
-        <div class="form-row mx-2">
-             <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Oxygen Upper'); ?>:</label>
-
-                    <input class='form-control' type='text' name='oxy_upper' id='oxy_upper' autocomplete="off"
-                      
-                        placeholder='<?php echo xla('Enter Oxygen Upper'); ?>' />
-                </div>
-            </div>
+        <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Oxygen Lower'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Respiratory Upper'); ?>:</label>
 
-                    <input class='form-control' type='text' name='oxy_lower' id='oxy_lower' autocomplete="off"
-                        
-                        placeholder='<?php echo xla('Enter Oxygen Lower'); ?>' />
-                </div>
+                <input class='form-control' type='text' name='resp_upper' id='resp_upper' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Respiratory Upper'); ?>' />
             </div>
-            
         </div>
-        <div class="form-row mx-2">
-              <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
+    </div>
+    <div class="form-row mx-2">
+        <div class="col-sm form-group">
+            <label for='form_facility'><?php echo xlt('Respiratory Lower'); ?>:</label>
 
-                    <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
+            <input class='form-control' type='text' name='resp_lower' id='resp_lower' autocomplete="off"
+                
+                placeholder='<?php echo xla('Enter Respiratory Lower'); ?>' />
+        </div>
+         <div class="col-sm form-group">
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Oxygen Upper'); ?>:</label>
+
+                <input class='form-control' type='text' name='oxy_upper' id='oxy_upper' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Oxygen Upper'); ?>' />
+            </div>
+        </div>
+        <div class="col-sm form-group">
+            <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Oxygen Lower'); ?>:</label>
+
+                <input class='form-control' type='text' name='oxy_lower' id='oxy_lower' autocomplete="off"
+                    
+                    placeholder='<?php echo xla('Enter Oxygen Lower'); ?>' />
+            </div>
+        </div>
+        
+    </div>
+    <div class="form-row mx-2">
+        <div class="col-sm form-group">
+            <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
+
+            <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
                         placeholder='<?php echo xla('Enter Pain Upper'); ?>' value="0"/>
-                </div>
-            </div>
+        </div>
+         <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
+               <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
                      placeholder='<?php echo xla('Enter Pain Lower'); ?>' value="0"/>
             </div>
-            
         </div>
-    
+        <div class="col-sm form-group">
+            <div class="col-sm form-group">
+                 <label for='form_facility'><?php echo xlt('Select Alert'); ?>:</label>
+
+                <select class='form-control' name='alert' id='alert'>
+                    <option value="Monitored">Monitored</option> 
+                    <option value="Need Attantion">Need Attantion</option> 
+                    
+                </select>
+            </div>
+        </div>
+        
+    </div>
        
+    
            
     <div class="form-row mx-2 mt-3">
         <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="submit" name="form_save" id="form_save" value="Add Patient">

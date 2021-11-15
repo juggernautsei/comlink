@@ -204,20 +204,30 @@ $providers = $loadDb->getProviders();
                 </div>
             </div>
         </div>
+        
         <div class="form-row mx-2">
             <div class="col-sm form-group">
+                <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
+                <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
+                    value='<?php echo $row['pain_upper']; ?>' placeholder='<?php echo xla('Enter Pain Upper'); ?>' />
+            </div>
+            <div class="col-sm form-group">
                 <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Pain Upper'); ?>:</label>
-
-                    <input class='form-control' type='text' name='pain_upper' id='pain_upper' autocomplete="off"
-                        value='<?php echo $row['pain_upper']; ?>' placeholder='<?php echo xla('Enter Pain Upper'); ?>' />
+                   <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
+                <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
+                    value='<?php echo $row['pain_lower']; ?>' placeholder='<?php echo xla('Enter Pain Lower'); ?>' />
                 </div>
             </div>
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Pain Lower'); ?>:</label>
+                <div class="col-sm form-group">
+                    <label for='form_facility'><?php echo xlt(' Select Alert Message'); ?>:</label>
 
-                <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
-                    value='<?php echo $row['pain_lower']; ?>' placeholder='<?php echo xla('Enter Pain Lower'); ?>' />
+                   <select class='form-control' name='alert' id='alert'>
+                       <option value="Monitored">Monitored</option> 
+                       <option value="Need Attantion">Need Attantion</option> 
+                      
+                    </select>
+                </div>
             </div>
         </div>
 

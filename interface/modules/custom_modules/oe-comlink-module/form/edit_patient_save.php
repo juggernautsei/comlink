@@ -34,9 +34,9 @@ $oxy_upper=$_POST['oxy_upper'];
 $oxy_lower=$_POST['oxy_lower'];
 $pain_upper=$_POST['pain_upper'];
 $pain_lower=$_POST['pain_lower'];
+$active=$_POST['alert'];
 
-
-sqlQuery("UPDATE patient_monitoring_form SET facility = $facility,provider = $provider,weight = $weight, height = $height,bp_upper = $bp_upper,bp_lower = $bp_lower,temp_upper = $temp_upper,temp_lower = $temp_lower,bs_upper = $bs_upper,bs_lower = $bs_lower,resp_upper = $resp_upper,resp_lower = $resp_lower,oxy_upper = $oxy_upper,oxy_lower = $oxy_lower,pain_upper = $pain_upper,pain_lower = '$pain_lower'" ."WHERE pid = $pid");
+sqlQuery("UPDATE patient_monitoring_form SET facility = $facility,provider = $provider,weight = $weight, height = $height,bp_upper = $bp_upper,bp_lower = $bp_lower,temp_upper = $temp_upper,temp_lower = $temp_lower,bs_upper = $bs_upper,bs_lower = $bs_lower,resp_upper = $resp_upper,resp_lower = $resp_lower,oxy_upper = $oxy_upper,oxy_lower = $oxy_lower,pain_upper = $pain_upper,pain_lower = '$pain_lower', alert = '$active'" ."WHERE pid = $pid");
 
 echo "Success Update Record !!!";
 

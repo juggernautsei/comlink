@@ -220,6 +220,7 @@ use OpenEMR\Core\Header;
                                     <th>Weight</th>
                                     <th>Height</th>
                                     <th>Pain Level</th>
+                                    <th>Alert</th>
                                 </tr>
                             </thead>
 
