@@ -44,6 +44,10 @@ if($count['COUNT(*)'] > 0){
     echo "Patient Already Exist !!!";
     
 }else{
+    $form_vitals = sqlQuery("SELECT COUNT(*) FROM form_vitals WHERE  pid =".$pid);
+    if($form_vitals['COUNT(*)'] > 0){
+       sqlQuery("UPDATE form_vitals SET height = $height,weight = $weight,temperature = $temp_upper,bps = $bp_upper,bpd = $bp_lower,oxygen_saturation = $oxy_upper WHERE  pid =".$pid);
+    }
     sqlQuery("INSERT INTO `patient_monitoring_form` (`id`, `pid`, `facility`,`provider`,`pm_id`, `weight`, `height`, `bp_upper`, `bp_lower`, `temp_upper`, `temp_lower`, `bs_upper`, `bs_lower`, `resp_upper`, `resp_lower`, `oxy_upper`, `oxy_lower`, `pain_upper`, `pain_lower`, `alert`, `updatedAt`) VALUES
             ('','$pid','$facility','$provider','1234','$weight','$height','$bp_upper', '$bp_lower', '$temp_upper', '$temp_lower', '$bs_upper', '$bs_lower', '$resp_upper', '$resp_lower', '$oxy_upper', '$oxy_lower','$pain_upper', '$pain_lower','$active','$date')");
 

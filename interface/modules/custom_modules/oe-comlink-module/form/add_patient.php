@@ -45,11 +45,15 @@ if($_POST){
     <?php Header::setupHeader(['report-helper','opener']); ?>
     <meta charset="utf-8" />
     <title><?php echo xlt('Add Patients');?></title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
     function sel_patient() {
         let title = '<?php echo xlt('Patient Search'); ?>';
         dlgopen( '<? echo dirname(__FILE__,5) ?>\main\calendar\find_patient_popup.php', '_blank', 650, 300, '', title);
     }
+    var $disabledResults = $(".js-example-disabled-results");
+    $disabledResults.select2();
     </script>
     <style type="text/css">
         .autocomplete-items {
@@ -112,8 +116,9 @@ if($_POST){
         </div>
         <div class="col-sm form-group">
             <label for='form_title'><?php echo xlt('Select Patient'); ?>:</label>
-            <select class='form-control' name='pid' id='pid'>
-                
+            
+            <select class='form-control js-example-disabled-results' name='pid' id='pid' required>
+                <option value="" hidden>Select patient</option>
                 <?php 
                 foreach($patients as $patient) {
                      echo "<option value='".$patient['pid']."'>".$patient['lname']."</option>";
@@ -268,6 +273,42 @@ if($_POST){
 </form>
 </body>
 <script>
+
+var $disabledResults = $("#pid");
+$disabledResults.select2();
+
+$('.js-example-disabled-results').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    var height=document.getElementById('height');
+    var weight=document.getElementById('weight');
+    var temp_upper=document.getElementById('temp_upper');
+    var bp_upper=document.getElementById('bp_upper');
+    var bp_lower=document.getElementById('bp_lower');
+    var oxy_upper=document.getElementById('oxy_upper');
+    if(valueSelected){
+        $.ajax({
+            type: 'post',
+            url: '../get_values_pop.php',
+            data: {dataID:valueSelected},
+            dataType: "json",
+            error: function(xhr, status, error) {
+                alert('error'+error);
+            },
+            success: function(results) {
+                height.value=results.height?results.height:0;
+                weight.value=results.weight?results.weight:0;
+                temp_upper.value=results.temperature?results.temperature:0;
+                bp_upper.value=results.bps?results.bps:0;
+                bp_lower.value=results.bpd?results.bpd:0;
+                oxy_upper.value=results.oxygen_saturation?results.oxygen_saturation:0;
+            }
+        }); 
+    }
+    
+    
+});
+
 $(function() {
     $('form').on('submit', function(e) {
 

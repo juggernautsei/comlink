@@ -12,7 +12,7 @@ class Database
     {
         
         $DBSQL_PATIENT = <<<'DB'
-            CREATE TABLE IF NOT EXISTS patient_Monitoring_list(
+            CREATE TABLE IF NOT EXISTS patient_monitoring_list(
             `id`            int         NOT NULL primary key AUTO_INCREMENT comment 'Primary Key',
             `pid`        bigint(11)     NOT NULL UNIQUE comment 'Patient ID',
             `updatedAt`     DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -21,7 +21,7 @@ class Database
 
         
         $DBSQL_FORM = <<<'DB'
-            CREATE TABLE IF NOT EXISTS patient_Monitoring_form(
+            CREATE TABLE IF NOT EXISTS patient_monitoring_form(
             `id`            int         NOT NULL primary key AUTO_INCREMENT comment 'Primary Key',
             `pid`        bigint(11)     NOT NULL UNIQUE comment 'Patient ID',
             `pm_id`    int(50) NOT NULL comment 'patient monitoring ID',
@@ -46,7 +46,7 @@ class Database
             ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
         DB;
         $db = $GLOBALS['dbase'];
-        $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_Monitoring'");
+        $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_monitoring'");
         if (empty($exist)) {
              sqlQuery($DBSQL_PATIENT);
              sqlQuery($DBSQL_FORM);
@@ -60,7 +60,7 @@ class Database
     public function doesTableExist()
     {
         $db = $GLOBALS['dbase'];
-        $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_Monitoring'");
+        $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_monitoring'");
         if (empty($exist)) {
             self::createComlinkTable();
             return "created";
