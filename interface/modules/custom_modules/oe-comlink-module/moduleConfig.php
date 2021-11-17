@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  *
  * @package      Comlink OpenEMR
  * @link               https://www.open-emr.org

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *
  * @package      Comlink OpenEMR
  * @link               https://www.open-emr.org
@@ -11,6 +11,7 @@
  *
  */
 
+use OpenEMR\Core\Header;
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Common\Acl\AclMain;
 
@@ -27,4 +28,23 @@ $loadTable = $installdatatable->getDatabase();
 //table creation
 $status = $loadTable->doesTableExist();
 
+$import_table = $installdatatable->getDatabase(); //example code
 
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comlink</title>
+    <?php Header::setupHeader(['common'])?>
+</head>
+<body>
+<div class="container-fluid">
+    <h3>Comlink Inc.</h3>
+</div>
+</body>
+</html>
