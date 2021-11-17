@@ -254,7 +254,7 @@ $(function() {
             },
             success: function(results) {
                 alert(results);
-               window.location.href = '/imara-pro/comlink/interface/modules/custom_modules/oe-comlink-module/comlinkUI.php';
+               window.location.href = '<?php echo $GLOBALS['webroot'];?>/interface/modules/custom_modules/oe-comlink-module/comlinkUI.php';
             }
         });
 
