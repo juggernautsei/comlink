@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../../globals.php";
-require_once dirname(__FILE__) . "/controller/Container.php";
+require_once "../../../../globals.php";
+require_once "../controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Core\Header;
@@ -200,31 +200,26 @@ use OpenEMR\Core\Header;
 
 <body class="body_top">
     <div>
-        <a href="#" class="btn btn-secondary" onclick="add_patient()" style="margin-top:10px;"><i
-                class="fa fa-plus"><?php echo xlt(' Add Patients'); ?></i></a>
+        <a href="#" class="btn btn-secondary" onclick="goBack()" style="margin-top:10px;"><i
+                class="fa fa-arrow-left"><?php echo xlt('  Go back'); ?></i></a>
     </div>
+    <h3 class="mt-4 pb-4">List Devices</h3>
     <div id="container_div" class="mt-3">
         <div class="w-100">
             <div class="jumbotron mt-3 p-4">
                 <div id="dynamic">
                     <div class="table-responsive">
+                        <input type="hidden" name="pid" id="pid" value="<?php echo $_GET['pid'];?>">
                         <table id="example" cellpadding="0" cellspacing="0" class="border-0 display">
                             <thead>
                                 <tr class="table-primary">
-                                    <th>Name</th>
-                                    <th>Birth Date</th>
-                                    <th>PID</th>
-                                    <th>Facility</th>
-                                    <th>Blood Presure</th>
-                                    <th>Tempreture</th>
-                                    <th>Blood Sugar</th>
-                                    <th>Respiration</th>
-                                    <th>Heart Rate </th>
-                                    <th>Oxygen saturation</th>
-                                    <th>Weight</th>
-                                    <th>Height</th>
-                                    <th>Pain Level</th>
-                                    <th>Alert</th>
+                                    <th>#</th>
+                                    <th>SubEhrEmrId</th>
+                                    <th>Device Id</th>
+                                    <th>Device Model</th>
+                                    <th>Device Maker</th>
+                                    <th>Device OS</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 
@@ -237,9 +232,35 @@ use OpenEMR\Core\Header;
 </body>
 <script>
 $(document).ready(function() {
+    var pid = $('#pid').val();
     $('#example').DataTable({
-        "ajax": "patient_monitor_ajax.php"
+        "ajax": "list_device_ajax.php?pid=" + pid
     });
+});
+
+function goBack() {
+    window.history.back();
+}
+
+$(document).on('click', '#edit', function() {
+    var id = $(this).attr('data-id');
+
+    var url = 'edit_devices.php?id=' + id;
+    dlgopen(url, '_blank', 620, 360, '', 'Edit Devices', {
+        onClosed: 'reload'
+    });
+
+});
+$(document).on('click', '#delete', function() {
+    var pid = $(this).attr('data-id');
+
+    $.post("delete_devices.php", {
+            pid: pid,
+        },
+        function(data, status) {
+            alert("Status: " + data);
+            location.reload();
+        });
 });
 </script>
 

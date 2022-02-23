@@ -18,8 +18,6 @@ class Database
             `updatedAt`     DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE = InnoDB COMMENT = 'patient monitoring';
         DB;
-
-        
         $DBSQL_FORM = <<<'DB'
             CREATE TABLE IF NOT EXISTS patient_monitoring_form(
             `id`            int         NOT NULL primary key AUTO_INCREMENT comment 'Primary Key',
@@ -45,12 +43,26 @@ class Database
             `updatedAt`     DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
         DB;
+        $DBSQL_DEVICE = <<<'DB'
+            CREATE TABLE IF NOT EXISTS `patient_devices_list` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `pid` bigint(12) DEFAULT NULL,
+                `subehremrid` varchar(255) DEFAULT NULL,
+                `deviceid` varchar(255) DEFAULT NULL,
+                `devicemodal` varchar(255) DEFAULT NULL,
+                `devicemaker` varchar(255) DEFAULT NULL,
+                `deviceos` varchar(255) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
+        DB;
+        
         $db = $GLOBALS['dbase'];
         $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_monitoring'");
         if (empty($exist)) {
-             sqlQuery($DBSQL_PATIENT);
-             sqlQuery($DBSQL_FORM);
-        }    
+            sqlQuery($DBSQL_PATIENT);
+            sqlQuery($DBSQL_FORM);
+            sqlQuery($DBSQL_DEVICE);
+        }
 
     }
 
