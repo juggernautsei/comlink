@@ -59,10 +59,16 @@ $providers = $loadDb->getProviders();
 
 <body>
     <div class="container">
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-4 form-group">
             <div class="form-row mx-2 mt-4 pt-4">
-                <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="add_device"
-                    id="add_device" value="Add Devices" onclick="add_device()">
+                <div class="col-sm form-group">
+                    <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="add_device"
+                        id="add_device" value="Add Devices" onclick="add_device()">
+                </div>
+                <div class="col-sm form-group">
+                    <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="bulk_upload"
+                        id="bulk_upload" value="Bulk Upload" onclick="bulk_upload()">
+                </div>
             </div>
         </div>
         <form role="form" method='post'>
@@ -256,7 +262,16 @@ $providers = $loadDb->getProviders();
 function add_device() {
     var pid = $('#pid').val();
     var url = 'add_devices.php?pid=' + pid;
-    dlgopen(url, '_blank', 620, 360, '', 'Add Devices', {
+    dlgopen(url, '_blank', 620, 360, '', 'Add Device', {
+        onClosed: 'reload'
+    });
+
+}
+
+function bulk_upload() {
+    var pid = $('#pid').val();
+    var url = 'bulk_upload.php?pid=' + pid;
+    dlgopen(url, '_blank', 620, 360, '', 'Bulk Upload Devices', {
         onClosed: 'reload'
     });
 

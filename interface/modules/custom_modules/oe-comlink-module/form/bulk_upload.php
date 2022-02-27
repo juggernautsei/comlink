@@ -47,6 +47,7 @@ if($_POST){
     <meta charset="utf-8" />
     <title><?php echo xlt('Add Patients');?></title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
     function sel_patient() {
@@ -85,104 +86,74 @@ if($_POST){
         background-color: DodgerBlue !important;
         color: #ffffff;
     }
+
+    .loading {
+        font-size: 0;
+        width: 30px;
+        height: 30px;
+        margin-top: 5px;
+        border-radius: 15px;
+        padding: 0;
+        border: 3px solid #FFFFFF;
+        border-bottom: 3px solid rgba(255, 255, 255, 0.0);
+        border-left: 3px solid rgba(255, 255, 255, 0.0);
+        background-color: transparent !important;
+        animation-name: rotateAnimation;
+        -webkit-animation-name: wk-rotateAnimation;
+        animation-duration: 1s;
+        -webkit-animation-duration: 1s;
+        animation-delay: 0.2s;
+        -webkit-animation-delay: 0.2s;
+        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: infinite;
+    }
     </style>
 </head>
 
 <body>
-
-    <form role="form" method='post' name='theform' id='theform' action='update_device_save.php'>
+    <form role="form" method="post" enctype="multipart/form-data" id="myform">
         <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
 
-        <?php
-        $id = $_GET['id'];
-        $sql = 'SELECT * FROM `patient_devices_list` WHERE id=' . $id;
-        $list = sqlStatement($sql);
-               
-        while ($row = sqlFetchArray($list)) {
-            $SubEhrEmrId=$row['subehremrid'];
-            $deviceid=$row['deviceid'];
-            $devicemodal=$row['devicemodal'];
-            $devicemaker=$row['devicemaker'];
-            $deviceos=$row['deviceos'];
-
-        }
+        <input type="hidden" name="pid" id="pid" value="<?php echo $_GET['pid']; ?>" />
 
 
-        ?>
-        <input type="hidden" name="pid" id="pid" value="<?php echo $_GET['id']; ?>" />
-        <div class="form-row mx-2">
-            <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('SubEhrEmrId'); ?>:</label>
+        <div class="form-row mx-8">
+            <div class="col-sm-11 ml-4">
+                <label for="formFile" class="form-label">Choose Your Csv File</label>
+                <input class="form-control" type="file" name='file' id='file' style="height: 43px;" accept=".csv"
+                    required>
 
-                <input class='form-control' type='text' name='sub_ehr' id='sub_ehr' autocomplete="off"
-                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $SubEhrEmrId; ?>"
-                    required />
             </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Device Id'); ?>:</label>
 
-                    <input class='form-control' type='text' name='device_id' id='device_id' autocomplete="off"
-                        placeholder='<?php echo xla('2fd49-0ke3vk-x3gt2'); ?>' value="<?php echo $deviceid; ?>"
-                        required />
-                </div>
-            </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Device Model'); ?>:</label>
-
-                    <input class='form-control' type='text' name='device_modal' id='device_modal' autocomplete="off"
-                        placeholder='<?php echo xla('Apple Watch'); ?>' value="<?php echo $devicemodal; ?>" required />
-                </div>
-            </div>
         </div>
-
-        <div class="form-row mx-2">
-            <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Device Maker'); ?>:</label>
-
-                <input class='form-control' type='text' name='device_maker' id='device_maker' autocomplete="off"
-                    placeholder='<?php echo xla('Apple'); ?>' value="<?php echo $devicemaker; ?>" required />
-            </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Device OS'); ?>:</label>
-
-                    <input class='form-control' type='text' name='watch_os' id='watch_os' autocomplete="off"
-                        placeholder='<?php echo xla('Watch OS'); ?>' value="<?php echo $deviceos; ?>" required />
-                </div>
-            </div>
-            <div class="col-sm form-group">
-                <div class="col-sm form-group">
-
-
-                </div>
-            </div>
-        </div>
-
-
-
-
-
         <div class="form-row mx-2 mt-3">
-            <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="submit" name="form_save" id="form_save"
-                value="Update Device">
+            <button class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="form_save" id="form_save"
+                value="Upload"><i class="loader"></i>Upload</button>
             <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type="button" id="cancel"
                 onclick="dlgclose()" value="Cancel">
         </div>
     </form>
 </body>
 <script>
-$(function() {
-    $('form').on('submit', function(e) {
+$('#form_save').on('click', function(event) {
 
-        e.preventDefault();
+    var fd = new FormData();
+    var files = $('#file')[0].files;
 
+    if (files.length > 0) {
+        $('.loader').addClass(`fa fa-spinner fa-spin`);
+        var pid = $('#pid').val();
+        fd.append('file', files[0]);
+        fd.append('pid', pid);
+        // alert(fd);
         $.ajax({
             type: 'post',
-            url: 'update_device_save.php',
-            data: $('form').serialize(),
+            url: 'bulk_upload_save.php',
+            data: fd,
+            contentType: false,
+            processData: false,
             error: function(xhr, status, error) {
+                $('.loader').removeClass(`fa fa-spinner fa-spin`);
                 alert(error);
             },
             success: function(results) {
@@ -191,10 +162,42 @@ $(function() {
                 dlgclose();
             }
         });
-
-    });
+    } else {
+        alert('Please Choose Csv File !...');
+    }
 
 });
+
+// $(function() {
+//     $('form').on('submit', function(event) {
+//         event.preventDefault();
+//         // try {
+//         // var c = $.parseJSON($('#floatingTextarea').val());
+//         $.ajax({
+//             type: 'post',
+//             url: 'bulk_upload_save.php',
+//             data: $('form').serialize(),
+//             processData: false,
+//             contentType: false,
+//             // dataType: 'json',
+//             // processData: false, // tell jQuery not to process the data
+//             // contentType: false, // tell jQuery not to set contentType
+//             error: function(xhr, status, error) {
+//                 alert(error);
+//             },
+//             success: function(results) {
+//                 alert(results);
+//                 location.reload();
+//                 dlgclose();
+//             }
+//         });
+//         // } catch (err) {
+//         //     alert('invalid json format');
+//         //     return
+//         // }
+//     });
+
+// });
 
 function autocomplete(inp, arr) {
     var currentFocus;
@@ -273,33 +276,7 @@ function autocomplete(inp, arr) {
 }
 
 
-function onChange() {
-    var search_list = [];
-    var search = document.getElementById("form_search").value;
-    var pro = "autocomplete";
 
-    $.ajax({
-        type: 'POST',
-        url: "add_patient.php",
-        dataType: 'text',
-        data: {
-            pro: pro,
-            type: search
-        },
-        async: false,
-        success: function(response) {
-            console.log(response);
-            result = JSON.parse(response);
-            search_list = result;
-            console.log(search_list);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr + " " + ajaxOptions + " " + thrownError);
-        }
-    });
-    autocomplete(document.getElementById("search_name"), search_list);
-}
-window.onload = onChange();
 
 function addName() {
     var search = document.getElementById("form_search").value;
