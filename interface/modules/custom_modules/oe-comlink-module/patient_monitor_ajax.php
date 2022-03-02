@@ -23,9 +23,23 @@ while ($row = sqlFetchArray($res)) {
     $query2 = "SELECT * FROM patient_data  WHERE patient_data.pid=". $row['pid'];
     $res2 = sqlStatement($query2);
 
+
+   
+
+
     while ($row2 = sqlFetchArray($res2)) {
 
-
+        $device_vitals = "SELECT count(*) FROM patient_devices_list WHERE pid=". $row['pid'];
+        $device_vitalsres = sqlStatement($device_vitals);
+        $device_vitalsrow = sqlFetchArray($device_vitalsres);
+        if(!empty($device_vitalsrow)){
+            if($device_vitalsrow['count(*)'] > 0){
+                $icons='<a href="form/list_device.php?pid='.$row['pid'].'"><i class="material-icons" style="color:blue">ad_units</i></a>';
+            }else{
+                $icons='';
+            }
+        }
+       
         if( $row['alert'] == "Need Attention"){
             $alert='<div class="alert alert-danger" role="alert">'.$row['alert'].'</div>';
         }elseif( $row['alert'] == "Monitored"){
@@ -34,7 +48,7 @@ while ($row = sqlFetchArray($res)) {
             $alert='';
         }
         $dataarray['data'][$i] =  [
-            '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>',
+            '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>'.$icons,
             $row2['DOB'],
             $row['pid'],
             $facilityrow['name']?$facilityrow['name']:0,
