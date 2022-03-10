@@ -204,6 +204,11 @@ use OpenEMR\Core\Header;
     <div>
         <a href="#" class="btn btn-secondary" onclick="add_patient()" style="margin-top:10px;"><i
                 class="fa fa-plus"><?php echo xlt(' Add Patients'); ?></i></a>
+        <a href="#" class="btn btn-secondary" onclick="bulk_upload()" style="margin-top:10px;"><i class="fa fa-plus"
+                name="bulk_upload" id="bulk_upload"><?php echo xlt(' Bulk Upload'); ?></i></a>
+
+
+
     </div>
     <div id="container_div" class="mt-3">
         <div class="w-100">
@@ -243,6 +248,15 @@ $(document).ready(function() {
         "ajax": "patient_monitor_ajax.php"
     });
 });
+
+function bulk_upload() {
+    var pid = $('#pid').val();
+    var url = 'form/bulk_upload.php?pid=' + pid;
+    dlgopen(url, '_blank', 620, 360, '', 'Bulk Upload Devices', {
+        onClosed: 'reload'
+    });
+
+}
 </script>
 
 
