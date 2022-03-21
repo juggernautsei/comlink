@@ -44,6 +44,7 @@ class FhirPatientRestController
      */
     public function post($fhirJson)
     {
+        
         $fhirValidate = $this->fhirValidate->validate($fhirJson);
         if (!empty($fhirValidate)) {
             return RestControllerHelper::responseHandler($fhirValidate, null, 400);

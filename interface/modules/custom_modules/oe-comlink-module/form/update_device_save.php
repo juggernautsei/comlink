@@ -46,7 +46,7 @@ $payload =
 
 $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
 $reponse=json_decode($resp);
-// var_dump($reponse->errorDesc);die;
+
 if($reponse->errorCode == '200' && $reponse->errorDesc = "OK"){
     sqlQuery("UPDATE patient_devices_list SET subehremrid = '$sub_ehr',deviceid = '$device_id',devicemodal = '$device_modal', devicemaker = '$device_maker',deviceos = '$watch_os' WHERE id = '$pid'");
 

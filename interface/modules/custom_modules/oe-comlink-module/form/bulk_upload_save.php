@@ -1,17 +1,7 @@
 <?php
 require_once "../../../../globals.php";
 require_once "../includes/api.php";
-$pid=$_POST['pid'];
 
-    $query = "SELECT * FROM patient_data WHERE pid=".$pid;
-    $res = sqlStatement($query);
-    while ($row = sqlFetchArray($res)) {
-
-        $fname=$row['fname'];
-        $lname=$row['lname'];
-        
-        
-    }
 
     $file=$_FILES['file'];
 
@@ -25,69 +15,89 @@ $pid=$_POST['pid'];
         $file = fopen($targetPath, "r");
           while (($getData = fgetcsv($file, 10000, ",")) !== FALSE)
            {
-               if($getData[0]=="subEhrEmrID") continue;
+               if($getData[0]=="pid") continue;
               
-                $sub_ehr=$getData[0];
-                $device_id=$getData[1];
-                $device_modal=$getData[2];
-                $device_maker=$getData[3];
-                $watch_os=$getData[4];
-                $action=$getData[5];
+                $pid=$getData[0];
+                $sub_ehr=$getData[1];
+                $device_id=$getData[2];
+                $device_modal=$getData[3];
+                $device_maker=$getData[4];
+                $watch_os=$getData[5];
+                $action=$getData[6];
+                
+
+                $query = "SELECT * FROM patient_data WHERE pid=".$pid;
+                $res = sqlStatement($query);
+                while ($row = sqlFetchArray($res)) {
+
+                    $fname=$row['fname'];
+                    $lname=$row['lname'];
+                    
+                    
+                }
 
                 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-                $Api_url = 'https://proddevbrdg.comlinktelehealth.io:57483/ctsiDevBridge/'.$action;
+                $Api_url = 'https://proddevbrdg.comlinktelehealth.io:57483/ctsiDevBridge/bulkProvDev';
                 // print_r($Api_url );die;
-                $payload =
-                    [
-                        "firstName" => $fname,
-                        "lastName" => $lname,
-                        "subEhrEmrID" => $sub_ehr,
-                        "deviceData" => [
-                            "deviceID" => $device_id,
-                            "deviceModel" => $device_modal,
-                            "deviceMaker" => $device_maker,
-                            "deviceOS" => $watch_os,
-                            "ehrEmrCallBackURL" => $actual_link
-                        ]
-                    ];
+               
+                $payload[] =[
+                    "firstName" => $fname, 
+                    "lastName" => $lname, 
+                    "subEhrEmrID" => $sub_ehr, 
+                    "actionCode" => $action, 
+                    "deviceData" => [
+                        "deviceID" => $device_id, 
+                        "deviceModel" => $device_modal, 
+                        "deviceMaker" => $device_maker, 
+                        "deviceOS" => $watch_os, 
+                        "ehrEmrCallBackURL" => $actual_link 
+                    ] 
+                ];
+                // array_push($payload,$load);
+                
 
-                $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
-                $reponse=json_decode($resp);
-                if($reponse->errorCode=='200' &&$reponse->errorDesc='OK'){
+                // $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
+               
+                // $reponse=json_decode($resp);
+                
+                // if($reponse->errorCode=='200' &&$reponse->errorDesc='OK'){
 
-                if(strtoupper($action)=="ADDSUBDEVICE" || strtoupper($action)=="CHANGESUBDEVICE") {
-                    $check = sqlQuery("SELECT count(*) FROM `patient_devices_list` WHERE pid='$pid' And `subehremrid` = '$sub_ehr' And `deviceid`='$device_id' And `devicemodal`='$device_modal' And `devicemaker`='$device_maker' And `deviceos`='$watch_os'");
-                    // print_r($check['count(*)']);die;
-                    if($check['count(*)'] > 0){
-                        sqlQuery("UPDATE patient_devices_list SET subehremrid = '$sub_ehr',deviceid = '$device_id',devicemodal = '$device_modal', devicemaker = '$device_maker',deviceos = '$watch_os' WHERE id = '$pid' And `subehremrid` = '$sub_ehr'");
+                // if(strtoupper($action)=="ADDSUBDEVICE" || strtoupper($action)=="CHANGESUBDEVICE") {
+                //     $check = sqlQuery("SELECT count(*) FROM `patient_devices_list` WHERE pid='$pid' And `subehremrid` = '$sub_ehr' And `deviceid`='$device_id' And `devicemodal`='$device_modal' And `devicemaker`='$device_maker' And `deviceos`='$watch_os'");
+                //     // print_r($check['count(*)']);die;
+                //     if($check['count(*)'] > 0){
+                //         sqlQuery("UPDATE patient_devices_list SET subehremrid = '$sub_ehr',deviceid = '$device_id',devicemodal = '$device_modal', devicemaker = '$device_maker',deviceos = '$watch_os' WHERE id = '$pid' And `subehremrid` = '$sub_ehr'");
 
-                    }else{
-                        sqlQuery("INSERT INTO `patient_devices_list` (`id`, `pid`, `subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES
-                            ('','$pid','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')");
-                    }
-                }else if(strtoupper($action)=="DELETESUBDEVICE"){
-                    $sql="DELETE FROM patient_devices_list WHERE pid = '$pid' And `subehremrid` = '$sub_ehr'";
+                //     }else{
+                //         sqlQuery("INSERT INTO `patient_devices_list` (`id`, `pid`, `subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES
+                //             ('','$pid','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')");
+                //     }
+                // }else if(strtoupper($action)=="DELETESUBDEVICE"){
+                //     $sql="DELETE FROM patient_devices_list WHERE pid = '$pid' And `subehremrid` = '$sub_ehr'";
                     
-                    sqlQuery($sql);
-                }
+                //     sqlQuery($sql);
+                // }
 
                 
                    
 
             
-                }else{
-                    echo 'Somthing Went Wrong '.$reponse->errorDesc;
-                }
+                // }else{
+                //     echo 'Somthing Went Wrong '.$reponse->errorDesc;
+                // }
       
-           }
-          echo 'Succefully Uploaded !!!';
+        }
+        $count= count($payload);
+        $post_payload= [
+            "numRecords" => $count,
+            "bulkData" => $payload
+        ];
+        $payload=json_encode($post_payload);
+        echo $payload;
+        echo 'Succefully Uploaded !!!';
      }
-  
-
-
-
-    }
+}
 
 die;
 

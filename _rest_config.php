@@ -324,6 +324,7 @@ class RestConfig
 
     public static function is_fhir_request($resource): bool
     {
+        
         return stripos(strtolower($resource), "/fhir/") !== false;
     }
 

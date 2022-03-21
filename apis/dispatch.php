@@ -34,6 +34,7 @@ $logger = SystemLogger::instance();
 $logger->debug("dispatch.php requested", ["resource" => $resource, "method" => $_SERVER['REQUEST_METHOD']]);
 
 $skipApiAuth = false;
+// print_r($_SERVER['HTTP_APICSRFTOKEN']);die;
 if (!empty($_SERVER['HTTP_APICSRFTOKEN'])) {
     // Calling api from within the same session (ie. isLocalApi) since a apicsrftoken header was passed
     $isLocalApi = true;
@@ -256,12 +257,17 @@ $gbl::$PORTAL_FHIR_ROUTE_MAP = $restApiCreateEvent->getPortalFHIRRouteMap();
 // api flag must be four chars
 // Pass only routes for current api.
 // Also check to ensure route is turned on in globals
+
+
+
 if ($gbl::is_fhir_request($resource)) {
+
     if (!$GLOBALS['rest_fhir_api'] && !$isLocalApi) {
+
         // if the external fhir api is turned off and this is not a local api call, then exit
         $logger->error("dispatch.php attempted to access resource with FHIR api turned off ", ['resource' => $resource]);
         $gbl::destroySession();
-        http_response_code(501);
+        http_response_code(502);
         exit();
     }
     $_SESSION['api'] = 'fhir';
