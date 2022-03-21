@@ -27,7 +27,7 @@ $registration->registration($clinic);
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Welcome to the module</title>
+        <title><?php echo xlt('Welcome to the module'); ?></title>
         <?php echo Header::setupHeader(); ?>
     </head>
     <body>
