@@ -54,6 +54,7 @@ if (!empty($_SERVER['HTTP_APICSRFTOKEN'])) {
 } else {
     // Calling api via rest
     // ensure token is valid
+
     $tokenRaw = $gbl::verifyAccessToken();
     if ($tokenRaw instanceof ResponseInterface) {
         $logger->error("dispatch.php failed token verify for resource", ["resource" => $resource]);

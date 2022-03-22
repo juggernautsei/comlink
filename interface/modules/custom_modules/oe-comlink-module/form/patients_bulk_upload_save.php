@@ -18,13 +18,9 @@ use OpenEMR\RestControllers\FHIR\FhirPractitionerRestController;
 use OpenEMR\RestControllers\FHIR\FhirProcedureRestController;
 use OpenEMR\RestControllers\FHIR\FhirMetaDataRestController;
 
-RestConfig::$ROUTE_MAP = array(
-    "GET /fhir/metadata" => function () {
-        $return = (new FhirMetaDataRestController())->getMetaData();
-        RestConfig::apiLog($return);
-        return $return;
-    },
 
-);
+$this->savetoken();
+
+
 
 ?>

@@ -666,6 +666,7 @@ use OpenEMR\RestControllers\FHIR\FhirMedicationRestController;
 use OpenEMR\RestControllers\FHIR\FhirMedicationRequestRestController;
 use OpenEMR\RestControllers\FHIR\FhirOrganizationRestController;
 use OpenEMR\RestControllers\FHIR\FhirPatientRestController;
+use OpenEMR\RestControllers\FHIR\FhirPatientBulkUploadRestController;
 use OpenEMR\RestControllers\FHIR\FhirPractitionerRoleRestController;
 use OpenEMR\RestControllers\FHIR\FhirPractitionerRestController;
 use OpenEMR\RestControllers\FHIR\FhirProcedureRestController;
@@ -678,21 +679,25 @@ RestConfig::$FHIR_ROUTE_MAP = array(
         RestConfig::apiLog($return);
         return $return;
     },
+
+    "POST /fhir/PatientBulkUpload" => function () {
+
+        // RestConfig::scope_check("user", "Patient", "write");
+        // RestConfig::authorization_check("patients", "demo");
+        $data = (array) (json_decode(file_get_contents("php://input"), true));
+        $return = (new FhirPatientBulkUploadRestController())->post($data);
+        RestConfig::apiLog($return, $data);
+        return $return;
+    },
+
+    
     "GET /fhir/.well-known/smart-configuration" => function () {
         $authController = new \OpenEMR\RestControllers\AuthorizationController();
         $return = (new \OpenEMR\RestControllers\SMART\SMARTConfigurationController($authController))->getConfig();
         RestConfig::apiLog($return);
         return $return;
     },
-    "POST /fhir/PatientBulkUpload" => function () {
 
-        // RestConfig::scope_check("user", "Patient", "write");
-        // RestConfig::authorization_check("patients", "demo");
-        $data = (array) (json_decode(file_get_contents("php://input"), true));
-        $return = (new FhirPatientRestController())->post($data);
-        RestConfig::apiLog($return, $data);
-        return $return;
-    },
     "POST /fhir/Patient" => function () {
         RestConfig::scope_check("user", "Patient", "write");
         RestConfig::authorization_check("patients", "demo");

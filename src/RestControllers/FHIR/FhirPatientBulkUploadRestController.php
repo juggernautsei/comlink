@@ -24,7 +24,7 @@ require_once(__DIR__ . '/../../../_rest_config.php');
 /**
  * Supports REST interactions with the FHIR patient resource
  */
-class FhirPatientRestController
+class FhirPatientBulkUploadRestController
 {
     private $fhirPatientService;
     private $fhirService;
@@ -35,6 +35,7 @@ class FhirPatientRestController
         $this->fhirService = new FhirResourcesService();
         $this->fhirPatientService = new FhirPatientService();
         $this->fhirValidate = new FhirValidationService();
+        
     }
 
     /**
