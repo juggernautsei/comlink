@@ -9,14 +9,14 @@ require_once "../includes/api.php";
     if(in_array($_FILES["file"]["type"],$allowedFileType)){
      if($_FILES["file"]["size"] > 0)
      {
-        
+
         $targetPath = '../uploads/'.$_FILES['file']['name'];
         move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
         $file = fopen($targetPath, "r");
           while (($getData = fgetcsv($file, 10000, ",")) !== FALSE)
            {
                if($getData[0]=="pid") continue;
-              
+
                 $pid=$getData[0];
                 $sub_ehr=$getData[1];
                 $device_id=$getData[2];
@@ -24,7 +24,7 @@ require_once "../includes/api.php";
                 $device_maker=$getData[4];
                 $watch_os=$getData[5];
                 $action=$getData[6];
-                
+
 
                 $query = "SELECT * FROM patient_data WHERE pid=".$pid;
                 $res = sqlStatement($query);
@@ -32,35 +32,37 @@ require_once "../includes/api.php";
 
                     $fname=$row['fname'];
                     $lname=$row['lname'];
-                    
-                    
+
+
                 }
 
-                $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $query = "SELECT * FROM patient_data WHERE pid=".$pid;
+                $res = sqlStatement($query);
+                while ($row = sqlFetchArray($res)) {
 
                 $Api_url = 'https://proddevbrdg.comlinktelehealth.io:57483/ctsiDevBridge/bulkProvDev';
                 // print_r($Api_url );die;
-               
+
                 $payload[] =[
-                    "firstName" => $fname, 
-                    "lastName" => $lname, 
-                    "subEhrEmrID" => $sub_ehr, 
-                    "actionCode" => $action, 
+                    "firstName" => $fname,
+                    "lastName" => $lname,
+                    "subEhrEmrID" => $sub_ehr,
+                    "actionCode" => $action,
                     "deviceData" => [
-                        "deviceID" => $device_id, 
-                        "deviceModel" => $device_modal, 
-                        "deviceMaker" => $device_maker, 
-                        "deviceOS" => $watch_os, 
-                        "ehrEmrCallBackURL" => $actual_link 
-                    ] 
+                        "deviceID" => $device_id,
+                        "deviceModel" => $device_modal,
+                        "deviceMaker" => $device_maker,
+                        "deviceOS" => $watch_os,
+                        "ehrEmrCallBackURL" => $actual_link
+                    ]
                 ];
                 // array_push($payload,$load);
-                
+
 
                 // $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
-               
+
                 // $reponse=json_decode($resp);
-                
+
                 // if($reponse->errorCode=='200' &&$reponse->errorDesc='OK'){
 
                 // if(strtoupper($action)=="ADDSUBDEVICE" || strtoupper($action)=="CHANGESUBDEVICE") {
@@ -75,18 +77,18 @@ require_once "../includes/api.php";
                 //     }
                 // }else if(strtoupper($action)=="DELETESUBDEVICE"){
                 //     $sql="DELETE FROM patient_devices_list WHERE pid = '$pid' And `subehremrid` = '$sub_ehr'";
-                    
+
                 //     sqlQuery($sql);
                 // }
 
-                
-                   
 
-            
+
+
+
                 // }else{
                 //     echo 'Somthing Went Wrong '.$reponse->errorDesc;
                 // }
-      
+
         }
         $count= count($payload);
         $post_payload= [
@@ -115,7 +117,7 @@ $bulkdatas=json_decode($_POST['bulkdata']);
  print_r($bulkdatas);die;
 
 foreach($bulkdatas as $bulkdata){
-   
+
 }
 
 
@@ -125,8 +127,8 @@ while ($row = sqlFetchArray($res)) {
 
     $fname=$row['fname'];
     $lname=$row['lname'];
-    
-    
+
+
 }
 
 
@@ -157,4 +159,4 @@ if($reponse->errorCode==200 &&$reponse->errorDesc=='OK'){
 }else{
     echo 'Somthing Went Wrong '.$reponse->errorDesc;
 }
-    
+

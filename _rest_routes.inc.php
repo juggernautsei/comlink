@@ -673,7 +673,7 @@ use OpenEMR\RestControllers\FHIR\FhirProcedureRestController;
 use OpenEMR\RestControllers\FHIR\FhirMetaDataRestController;
 
 RestConfig::$FHIR_ROUTE_MAP = array(
-    "POST /fhir/metadata" => function () {
+    "GET /fhir/metadata" => function () {
 
         $return = (new FhirMetaDataRestController())->getMetaData();
         RestConfig::apiLog($return);
@@ -706,7 +706,6 @@ RestConfig::$FHIR_ROUTE_MAP = array(
         RestConfig::apiLog($return);
         return $return;
     },
-
     "POST /fhir/Patient" => function () {
         RestConfig::scope_check("user", "Patient", "write");
         RestConfig::authorization_check("patients", "demo");
