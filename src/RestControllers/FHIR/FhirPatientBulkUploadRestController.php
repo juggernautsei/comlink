@@ -17,6 +17,7 @@ use OpenEMR\Services\FHIR\FhirPatientService;
 use OpenEMR\Services\FHIR\FhirValidationService;
 use OpenEMR\RestControllers\RestControllerHelper;
 use OpenEMR\FHIR\R4\FHIRResource\FHIRBundle\FHIRBundleEntry;
+use OpenEMR\Services\FHIR\FhirPatientBulkService;
 use OpenEMR\Validators\ProcessingResult;
 
 require_once(__DIR__ . '/../../../_rest_config.php');
@@ -27,6 +28,7 @@ require_once(__DIR__ . '/../../../_rest_config.php');
 class FhirPatientBulkUploadRestController
 {
     private $fhirPatientService;
+    private $fhirPatientBulkService;
     private $fhirService;
     private $fhirValidate;
 
@@ -34,8 +36,9 @@ class FhirPatientBulkUploadRestController
     {
         $this->fhirService = new FhirResourcesService();
         $this->fhirPatientService = new FhirPatientService();
+        $this->fhirPatientBulkService = new FhirPatientBulkService();
         $this->fhirValidate = new FhirValidationService();
-        
+
     }
 
     /**
@@ -45,12 +48,14 @@ class FhirPatientBulkUploadRestController
      */
     public function post($fhirJson)
     {
-        $fhirValidate = $this->fhirValidate->validate($fhirJson);
-        if (!empty($fhirValidate)) {
-            return RestControllerHelper::responseHandler($fhirValidate, null, 400);
-        }
 
-        $processingResult = $this->fhirPatientService->insert($fhirJson);
+
+        // $fhirValidate = $this->fhirValidate->validate($fhirJson);
+        // if (!empty($fhirValidate)) {
+        //     return RestControllerHelper::responseHandler($fhirValidate, null, 400);
+        // }
+
+        $processingResult = $this->fhirPatientBulkService->insert($fhirJson);
         return RestControllerHelper::handleFhirProcessingResult($processingResult, 201);
     }
 

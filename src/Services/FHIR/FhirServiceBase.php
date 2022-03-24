@@ -64,8 +64,10 @@ abstract class FhirServiceBase
      */
     public function insert($fhirResource)
     {
-        $openEmrRecord = $this->parseFhirResource($fhirResource);
-        return $this->insertOpenEmrRecord($openEmrRecord);
+
+
+        // $openEmrRecord = $this->parseFhirResource($fhirResource);
+        return $this->insertOpenEmrRecord($fhirResource);
     }
 
     /**

@@ -23,7 +23,7 @@ use OpenEMR\Validators\ProcessingResult;
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  *
  */
-class FhirPatientService extends FhirServiceBase
+class FhirPatientBulkService extends FhirServiceBase
 {
     /**
      * @var PatientService
@@ -228,6 +228,7 @@ class FhirPatientService extends FhirServiceBase
      */
     public function parseFhirResource($fhirResource = array())
     {
+
         $data = array();
 
         if (isset($fhirResource['id'])) {
@@ -320,7 +321,15 @@ if(isset($fhirResource['identifier'])){
         }
     }
 }
+if(isset($fhirResource['bulkVitals'])){
+    foreach($fhirResource['bulkVitals'] as $bulkvalues){
 
+    }
+}
+
+// echo $fhirResource['bulkVitals'];
+// print_r($fhirResource['bulkVitals']);
+// die;
         return $data;
     }
 
@@ -334,7 +343,7 @@ if(isset($fhirResource['identifier'])){
     {
 
 
-        return $this->patientService->insert($openEmrRecord);
+        return $this->patientService->insertbulkpatient($openEmrRecord);
     }
 
 

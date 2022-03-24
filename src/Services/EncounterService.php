@@ -379,22 +379,27 @@ class EncounterService extends BaseService
      */
     public function insertEncounter($puuid, $data)
     {
+
+
         $processingResult = new ProcessingResult();
         $processingResult = $this->encounterValidator->validate(
             array_merge($data, ["puuid" => $puuid]),
             EncounterValidator::DATABASE_INSERT_CONTEXT
         );
 
-        if (!$processingResult->isValid()) {
-            return $processingResult;
-        }
+        // if (!$processingResult->isValid()) {
+        //     return $processingResult;
+        // }
 
         $encounter = generate_id();
+
         $data['encounter'] = $encounter;
         $data['uuid'] = $this->uuidRegistry->createUuid();
         $data['date'] = date("Y-m-d");
         $puuidBytes = UuidRegistry::uuidToBytes($puuid);
+
         $data['pid'] = $this->getIdByUuid($puuidBytes, self::PATIENT_TABLE, "pid");
+
         $query = $this->buildInsertColumns($data);
         $sql = " INSERT INTO form_encounter SET ";
         $sql .= $query['set'];
@@ -404,15 +409,28 @@ class EncounterService extends BaseService
             $query['bind']
         );
 
-        addForm(
-            $encounter,
-            "New Patient Encounter",
-            $results,
-            "newpatient",
-            $data['pid'],
-            $data["provider_id"],
-            $data["date"]
-        );
+if(isset($data["provider_id"])){
+    addForm(
+        $encounter,
+        "New Patient Encounter",
+        $results,
+        "newpatient",
+        $data['pid'],
+        $data["provider_id"],
+        $data["date"]
+    );
+}else{
+    addForm(
+        $encounter,
+        "New Patient Encounter",
+        $results,
+        "newpatient",
+        $data['pid'],
+        $data["provider_id"]=1,
+        $data["date"]
+    );
+}
+
 
         if ($results) {
             $processingResult->addData(array(
@@ -604,6 +622,8 @@ class EncounterService extends BaseService
 
     public function insertVital($pid, $eid, $data)
     {
+
+
         $vitalSql  = " INSERT INTO form_vitals SET";
         $vitalSql .= "     date=NOW(),";
         $vitalSql .= "     activity=1,";
