@@ -674,25 +674,22 @@ use OpenEMR\RestControllers\FHIR\FhirMetaDataRestController;
 
 RestConfig::$FHIR_ROUTE_MAP = array(
     "GET /fhir/metadata" => function () {
-
-        $return = (new FhirMetaDataRestController())->getMetaData();
-        RestConfig::apiLog($return);
-        return $return;
-        // $data = (array) (json_decode(file_get_contents("php://input"), true));
-        // // print_r($data);
-        // // die('dddd');
-
-        // $return = (new FhirPatientBulkUploadRestController())->post($data);
-        // RestConfig::apiLog($return, $data);
+die('fff');
+        // $return = (new FhirMetaDataRestController())->getMetaData();
+        // RestConfig::apiLog($return);
         // return $return;
+        $data = (array) (json_decode(file_get_contents("php://input"), true));
+        $return = (new FhirPatientBulkUploadRestController())->post($data);
+        RestConfig::apiLog($return, $data);
+        return $return;
 
 
     },
 
     "POST /fhir/PatientBulkUpload" => function () {
 
-        RestConfig::scope_check("user", "Patient", "write");
-        RestConfig::authorization_check("patients", "demo");
+        // RestConfig::scope_check("user", "Patient", "write");
+        // RestConfig::authorization_check("patients", "demo");
         $data = (array) (json_decode(file_get_contents("php://input"), true));
         $return = (new FhirPatientBulkUploadRestController())->post($data);
         RestConfig::apiLog($return, $data);

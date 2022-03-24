@@ -107,6 +107,7 @@ class PatientService extends BaseService
      */
 
      public function insertbulkpatient($data){
+         dei('sss');
         $re ['numRecords']=count($data['bulkVitals']);
         $re_in=[];
         $re_in_total=[];
