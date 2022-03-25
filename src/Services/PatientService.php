@@ -150,6 +150,7 @@ class PatientService extends BaseService
             array_push($re_in_total,$re_in);
         }
         $re['bulkDataResp']=$re_in_total;
+        http_response_code(200);
         echo json_encode($re);
 
         die;
