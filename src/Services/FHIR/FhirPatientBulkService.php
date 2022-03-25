@@ -341,9 +341,7 @@ if(isset($fhirResource['bulkVitals'])){
      */
     public function insertOpenEMRRecord($openEmrRecord)
     {
-
-
-        return $this->patientService->insertbulkpatient($openEmrRecord);
+        die($this->patientService->insertbulkpatient($openEmrRecord));
     }
 
 

@@ -324,7 +324,7 @@ class RestConfig
 
     public static function is_fhir_request($resource): bool
     {
-        
+
         return stripos(strtolower($resource), "/fhir/") !== false;
     }
 
@@ -359,7 +359,8 @@ class RestConfig
         // let the capability statement for FHIR or the SMART-on-FHIR through
         if (
             $resource === ("/" . self::$SITE . "/fhir/metadata") ||
-            $resource === ("/" . self::$SITE . "/fhir/.well-known/smart-configuration")
+            $resource === ("/" . self::$SITE . "/fhir/.well-known/smart-configuration")||
+            $resource === ("/" . self::$SITE . "/fhir/PatientBulkUpload")
         ) {
             return true;
         } else {
