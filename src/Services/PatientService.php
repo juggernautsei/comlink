@@ -123,7 +123,9 @@ class PatientService extends BaseService
             $d['facility']="Your Clinic Name Here";
             $d['facility_id']=1;
             $d['sensitivity']="normal";
-
+            $d['reason']="Vitals";
+            $d['groupname']="Default";
+            $d['user']="OEQ-admin-40";
 
             $geteid = (new EncounterRestController())->post($puuid, $d);
             $sql= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
@@ -151,19 +153,21 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp']=$re_in_total;
         http_response_code(200);
-        echo json_encode($re);
+        return json_encode($re);
 
-        die;
 
      }
      private function insertVital($pid, $eid, $data)
     {
-
+// print_r($data);
+// die;
 
         $vitalSql  = " INSERT INTO form_vitals SET";
         $vitalSql .= "     date=NOW(),";
         $vitalSql .= "     activity=1,";
         $vitalSql .= "     pid=?,";
+        $vitalSql .= "     user=?,";
+        $vitalSql .= "     groupname=?,";
         $vitalSql .= "     bps=?,";
         $vitalSql .= "     bpd=?,";
         $vitalSql .= "     weight=?,";
@@ -181,6 +185,8 @@ class PatientService extends BaseService
             $vitalSql,
             array(
                 $pid,
+                $data["user"],
+                $data["groupname"],
                 $data["bps"],
                 $data["bpd"],
                 $data["weight"],
@@ -196,6 +202,7 @@ class PatientService extends BaseService
             )
         );
 
+
         if (!$vitalResults) {
             return false;
         }
@@ -203,11 +210,14 @@ class PatientService extends BaseService
         $formSql = "INSERT INTO forms SET";
         $formSql .= "     date=NOW(),";
         $formSql .= "     encounter=?,";
+        $formSql .= "     user='OEQ-admin-40',";
+        $formSql .= "     groupname='Default',";
         $formSql .= "     form_name='Vitals',";
         $formSql .= "     authorized='1',";
         $formSql .= "     form_id=?,";
         $formSql .= "     pid=?,";
         $formSql .= "     formdir='vitals'";
+
 
         $formResults = sqlInsert(
             $formSql,
