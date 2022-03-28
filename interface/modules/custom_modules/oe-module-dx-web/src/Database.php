@@ -106,7 +106,6 @@ class Database
                     $csv .= "U, ";
             }
             $csv .=
-                $row['status'] . ", " .
                 $row['name'] . ", " .
                 $row['plan_name'] . ", " .
                 $row['group_number'] . ", " .
