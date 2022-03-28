@@ -102,7 +102,7 @@ class Database
                     $csv .= 'No' . ", ";
                 }
                 $csv .= $GLOBALS['unique_installation_id'] . ", ";
-                $csv .= $row['email'] . PHP_EOL;
+                $csv .= $row['email'] . "\r\n";
         }
         return $csv;
     }
