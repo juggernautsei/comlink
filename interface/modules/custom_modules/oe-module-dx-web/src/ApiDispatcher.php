@@ -9,7 +9,7 @@
  *
  */
 
-namespace OpenEMR\Module\Documo;
+namespace Juggernaut\Modules\DxWeb;
 
 use OpenEMR\Module\Documo\Database;
 
@@ -19,7 +19,7 @@ class ApiDispatcher
 
     public function __construct()
     {
-        $this->apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZjJkN2I2NC1kZGQxLTQwOTEtYmZmMi03ODA5ODQ0MmE2MWYiLCJhY2NvdW50SWQiOiIxODJjNTIyNC1lMzNmLTQ3ODMtOWI5Mi04YjJlODgxNWU0OTkiLCJpYXQiOjE2MzU0NDMyMDN9.WY3X-HMpWqO7JJ7EoQPxDEMZPujrSNjgubLzFiSDJCU";
+        //do epic stuff
     }
 
     public function registration($clinic)

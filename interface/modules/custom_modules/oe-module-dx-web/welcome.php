@@ -36,11 +36,15 @@ $registration->registration($clinic);
                 <h1><?php echo xlt('Welcome'); ?></h1>
             </div>
             <div>
-                <p><?php echo xlt('Your installation is now registered'); ?></p>
+                <p style="color: green;"><?php echo xlt('Your installation is now registered'); ?></p>
             </div>
-            <div>
-                <h2 class="font-weight-bold pb-4">Enterprise <span class="text-primary">cloud fax</span> for regulated industries</h2>
-                <p class="pr-xl-9 font-size-md-font-weight-bold">The easiest way for both large and small businesses to achieve real digital transformation. Save time and money by eliminating hardware and outsourcing fax to the cloud. Easily integrate secure and reliable cloud fax into existing apps and workflows.</p>
+            <div class="header-content">
+
+                <h1 class="et_pb_module_header">Trust DxScript for your ePrescribing needs.</h1>
+                <span class="et_pb_fullwidth_header_subhead">Securely prescribe controlled substances electronically in a fully compliant fashion</span>
+                <div class="et_pb_header_content_wrapper"><p>&nbsp;</p>
+                    <p><span>DxScript® is a Surescripts™ and EPCS certified, HIPAA compliant, cloud-based ePrescribing solution that puts insurance, pharmacy benefits plan eligibility and formulary information at the provider’s fingertips at the point of prescribing. We maintain a database of the latest FDA and DEA released medications as well as all pharmacies that are EDI or eFax capable. Our electronic PDR provides our users real time drug-to-drug, drug to allergies and drug to food contraindication alerts at the point of care. DxScript® even suggests alternative drugs in the event there is a contraindication or allergy alert for a specific drug. No proprietary hardware or software required. All training and set-up is performed by professional Customer Care Engineers at NO COST to the provider(s).</span></p></div>
+
             </div>
             <div class="footer">
                 <p><?php echo xlt("This module was developed by") ?> <a href="https://affordablecustomehr.com" target="_blank" ><?php echo xlt("Affordable Custom EHR") ?></a></p>
