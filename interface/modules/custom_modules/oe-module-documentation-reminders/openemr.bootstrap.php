@@ -10,7 +10,6 @@
  *
  */
 
-namespace Juggernaut\Modules\DocumentReminder;
 
 use OpenEMR\Menu\MenuEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
