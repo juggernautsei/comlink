@@ -49,8 +49,8 @@ class Database
             in.policy_number,
             in.subscriber_relationship
             FROM patient_data pd
-            LEFT JOIN insurance_data as in ON pd.pid = in.pid
-            LEFT JOIN insurance_companies as ic ON in.provider = ic.id
+            LEFT JOIN insurance_data AS `in` ON pd.pid = in.pid
+            LEFT JOIN insurance_companies AS `ic` ON in.provider = ic.id
             ORDER BY pd.lname, pd.fname
         ";
 

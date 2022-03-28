@@ -49,7 +49,7 @@ function oe_module_dxweb_settings_add_menu_item(MenuEvent $event)
     $menuItem->requirement = 0;
     $menuItem->target = 'mod';
     $menuItem->menu_id = 'dxweb0';
-    $menuItem->label = xlt("Fax Account Summary");
+    $menuItem->label = xlt("DxScript Setup");
     $menuItem->url = "/interface/modules/custom_modules/oe-module-dx-web/settings.php";
     $menuItem->children = [];
     $menuItem->acl_req = ["patients", "docs"];
