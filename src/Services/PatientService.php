@@ -132,6 +132,7 @@ class PatientService extends BaseService
             $sql= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
             $eid =$sql['LastID'];
             $d['username'] =$sql_user['username'];
+            $d['groupname'] ='Default';
             $d['bps']=$d['vitalsData']['ctsiSystolic'];
             $d['bpd']=$d['vitalsData']['ctsiDiastolic'];
             $d['weight']=$d['vitalsData']['ctsiWeight'];
@@ -164,8 +165,6 @@ class PatientService extends BaseService
         $vitalSql  = " INSERT INTO form_vitals SET";
         $vitalSql .= "     date=NOW(),";
         $vitalSql .= "     activity=1,";
-        $vitalSql .= "     user='".$data['username']."',";
-        $vitalSql .= "     groupname='Default',";
         $vitalSql .= "     pid=?,";
         $vitalSql .= "     bps=?,";
         $vitalSql .= "     bpd=?,";
@@ -178,7 +177,9 @@ class PatientService extends BaseService
         $vitalSql .= "     note=?,";
         $vitalSql .= "     waist_circ=?,";
         $vitalSql .= "     head_circ=?,";
-        $vitalSql .= "     oxygen_saturation=?";
+        $vitalSql .= "     oxygen_saturation=?,";
+        $vitalSql .= "     user=?,";
+        $vitalSql .= "     groupname=?";
 
         $vitalResults = sqlInsert(
             $vitalSql,
@@ -195,7 +196,9 @@ class PatientService extends BaseService
                 $data["note"],
                 $data["waist_circ"],
                 $data["head_circ"],
-                $data["oxygen_saturation"]
+                $data["oxygen_saturation"],
+                $data['username'],
+                $data['groupname']
             )
         );
 
