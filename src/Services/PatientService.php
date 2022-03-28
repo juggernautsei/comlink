@@ -126,8 +126,12 @@ class PatientService extends BaseService
 
 
             $geteid = (new EncounterRestController())->post($puuid, $d);
+            $sql_user= sqlQuery("SELECT username FROM `users` WHERE `id`=1");
+
+
             $sql= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
             $eid =$sql['LastID'];
+            $d['username'] =$sql_user['username'];
             $d['bps']=$d['vitalsData']['ctsiSystolic'];
             $d['bpd']=$d['vitalsData']['ctsiDiastolic'];
             $d['weight']=$d['vitalsData']['ctsiWeight'];
@@ -150,19 +154,17 @@ class PatientService extends BaseService
             array_push($re_in_total,$re_in);
         }
         $re['bulkDataResp']=$re_in_total;
-echo json_encode($re);
+        echo json_encode($re);
 
-        die;
+
 
      }
      private function insertVital($pid, $eid, $data)
     {
-
-
         $vitalSql  = " INSERT INTO form_vitals SET";
         $vitalSql .= "     date=NOW(),";
         $vitalSql .= "     activity=1,";
-        $vitalSql .= "     user='OEQ-admin-40',";
+        $vitalSql .= "     user='".$data['username']."',";
         $vitalSql .= "     groupname='Default',";
         $vitalSql .= "     pid=?,";
         $vitalSql .= "     bps=?,";
