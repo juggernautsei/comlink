@@ -11,6 +11,8 @@
 
 namespace Juggernaut\Modules\DxWeb;
 
+use OpenEMR\Common\Uuid\UuidRegistry;
+
 class Database
 {
     public function __construct()
@@ -57,7 +59,7 @@ class Database
         $patientList = sqlStatementNoLog($sql);
         $csv = '';
         while ($row = sqlFetchArray($patientList)) {
-            $csv .= $row['uuid'] . ", " .
+            $csv .= UuidRegistry::uuidToString($row['uuid']) . ", " .
                 $row['pid'] . ", " .
                 $row['DOB'] . ", " ;
             if ($row['sex'] == 'Male') {

@@ -36,7 +36,7 @@ $registration->registration($clinic);
                 <h1><?php echo xlt('Welcome'); ?></h1>
             </div>
             <div>
-                <p><?php echo xlt('Your installation is now registered'); ?></p>
+                <p style="color: green;"><?php echo xlt('Your installation is now registered'); ?></p>
             </div>
             <div class="header-content">
 
