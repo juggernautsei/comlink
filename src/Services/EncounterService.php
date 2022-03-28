@@ -400,8 +400,6 @@ class EncounterService extends BaseService
 
         $data['pid'] = $this->getIdByUuid($puuidBytes, self::PATIENT_TABLE, "pid");
 
-
-
         $query = $this->buildInsertColumns($data);
         $sql = " INSERT INTO form_encounter SET ";
         $sql .= $query['set'];
