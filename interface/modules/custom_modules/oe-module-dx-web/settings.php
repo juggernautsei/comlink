@@ -17,6 +17,8 @@ use Juggernaut\Modules\DxWeb\Database;
 use OpenEMR\Core\Header;
 
 $send = new Database();
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,7 +34,14 @@ $send = new Database();
 <div class="container">
     <div>
         <h1><?php echo "DxScript Setup" ?></h1>
-        <p><?php echo xlt('Patients need to be uploaded to DxScript'); ?></p>
+        <p><?php
+            if (empty($send->checkUuid())) {
+                echo xlt("Your patient table does not have UUIDs for the patients. Please check your version must be greater than 5.1.0");
+                die;
+            } else {
+                echo xlt('Patients need to be uploaded to DxScript');
+            }
+            ?></p>
     </div>
     <div>
         <?php echo $send->initialSendPatients(); ?>

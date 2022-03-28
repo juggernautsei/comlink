@@ -120,4 +120,10 @@ class Database
         }
         return $csv;
     }
+
+    public function checkUuid()
+    {
+        return sqlQuery("SELECT uuid FROM patient_data ORDER BY id DESC LIMIT 1");
+
+    }
 }
