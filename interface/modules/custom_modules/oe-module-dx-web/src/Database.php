@@ -92,6 +92,19 @@ class Database
                 default:
                     $csv .= "'', ";
             }
+            switch ($row['status']) {
+                case "married":
+                    $csv .= "M, ";
+                    break;
+                case "single":
+                    $csv .= "S, ";
+                    break;
+                case "divorce":
+                    $csv .= "D, ";
+                    break;
+                default:
+                    $csv .= "U, ";
+            }
             $csv .=
                 $row['status'] . ", " .
                 $row['name'] . ", " .
