@@ -113,7 +113,8 @@ class PatientService extends BaseService
         $re_in_total=[];
         foreach($data['bulkVitals'] as $d){
 
-
+// print_r($d);
+// die;
             $deviceid =$d['subDeviceID'];
             $sql= sqlQuery("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
             $pid = $sql['pid'];
@@ -123,8 +124,8 @@ class PatientService extends BaseService
             $d['facility']="Your Clinic Name Here";
             $d['facility_id']=1;
             $d['sensitivity']="normal";
-
-
+            $d["onset_date"]=date('Y-m-d h:i:s');
+            $d["reason"]='Vitals';
             $geteid = (new EncounterRestController())->post($puuid, $d);
             $sql_user= sqlQuery("SELECT username FROM `users` WHERE `id`=1");
 
@@ -145,6 +146,7 @@ class PatientService extends BaseService
             $d['waist_circ']="";
             $d['head_circ']="";
             $d['oxygen_saturation']=$d['vitalsData']['ctsiSpo2'];
+            $d['temp_method']="Device";
 
             $serviceResult = $this->insertVital($pid, $eid, $d);
             $re_in['actionCode']='ADD';
@@ -180,7 +182,7 @@ die;
         $vitalSql .= "     oxygen_saturation=?,";
         $vitalSql .= "     user=?,";
         $vitalSql .= "     groupname=?";
-
+//temp_method
         $vitalResults = sqlInsert(
             $vitalSql,
             array(
@@ -198,7 +200,8 @@ die;
                 $data["head_circ"],
                 $data["oxygen_saturation"],
                 $data['username'],
-                $data['groupname']
+                $data['groupname'],
+
             )
         );
 

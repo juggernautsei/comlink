@@ -380,7 +380,6 @@ class EncounterService extends BaseService
     public function insertEncounter($puuid, $data)
     {
 
-
         $processingResult = new ProcessingResult();
         $processingResult = $this->encounterValidator->validate(
             array_merge($data, ["puuid" => $puuid]),
@@ -417,7 +416,9 @@ if(isset($data["provider_id"])){
         "newpatient",
         $data['pid'],
         $data["provider_id"],
-        $data["date"]
+        $data['onset_date'],
+        $data['reason']
+        // "onset_date=NOW()",
     );
 }else{
     addForm(
@@ -427,10 +428,11 @@ if(isset($data["provider_id"])){
         "newpatient",
         $data['pid'],
         $data["provider_id"]=1,
-        $data["date"]
+        $data['onset_date'],
+        $data['reason']
+        // "onset_date=NOW()"
     );
 }
-
 
         if ($results) {
             $processingResult->addData(array(
