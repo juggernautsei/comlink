@@ -105,35 +105,48 @@ class PatientService extends BaseService
      * @return ProcessingResult which contains validation messages, internal error messages, and the data
      * payload.
      */
+    public static function getUsernames($deviceid)
+    {
+        $rez = sqlStatement("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
+        return $rez;
+    }
 
+    public static function getuser_facility()
+    {
+        $rez = sqlStatement("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
+        return $rez;
+    }
+    public static function get_uuid($pid)
+    {
+        $rez = sqlStatement("SELECT uuid FROM `patient_data` WHERE `id`=$pid");
+        return $rez;
+    }
+    public static function getform_encounter_id()
+    {
+        $rez = sqlStatement("SELECT MAX(ID) AS LastID FROM form_encounter");
+        return $rez;
+    }
      public function insertbulkpatient($data){
 
         $re ['numRecords']=count($data['bulkVitals']);
         $re_in=[];
         $re_in_total=[];
         foreach($data['bulkVitals'] as $d){
-
             $deviceid =$d['subDeviceID'];
-            $getpatientid= sqlQuery("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
-            $pid = $getpatientid['pid'];
-
-            $getuser_facility= sqlQuery("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
-            $d['facility']=$getuser_facility['name'];
-            $d['facility_id']=$getuser_facility['facility_id'];
-
-            $getuuid= sqlQuery("SELECT uuid FROM `patient_data` WHERE `id`=$pid");
-            $puuid = UuidRegistry::uuidToString($getuuid['uuid']);
-
-
-
+            $getpatientid= self::getUsernames($deviceid);
+            $pid = $getpatientid->fields['pid'];
+            $getuser_facility= self::getuser_facility();
+            $d['facility']=$getuser_facility->fields['name'];
+            $d['facility_id']=$getuser_facility->fields['facility_id'];
+            $getuuid= self::get_uuid($pid);
+            $puuid = UuidRegistry::uuidToString($getuuid->fields['uuid']);
             $d['sensitivity']="normal";
             $d["onset_date"]=date('Y-m-d h:i:s');
             $d["reason"]='Vitals';
             $geteid = (new EncounterRestController())->post($puuid, $d);
+            $getform_encounter_id= self::getform_encounter_id();
 
-
-            $getform_encounter= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
-            $d['username'] =$getuser_facility['username'];
+            $d['username'] =$getuser_facility->fields['username'];
             $d['groupname'] ='Default';
             $d['bps']=$d['vitalsData']['ctsiSystolic'];
             $d['bpd']=$d['vitalsData']['ctsiDiastolic'];
@@ -149,7 +162,7 @@ class PatientService extends BaseService
             $d['oxygen_saturation']=$d['vitalsData']['ctsiSpo2'];
             $d['temp_method']="Device";
 
-            $serviceResult = $this->insertVital($pid, $getform_encounter['LastID'], $d);
+            $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['LastID'], $d);
             $re_in['actionCode']='ADD';
             $re_in['errorCode']='200';
             $re_in['errorDesc']='Success';
