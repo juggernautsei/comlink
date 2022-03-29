@@ -216,6 +216,8 @@ class PatientService extends BaseService
         $formSql .= "     authorized='1',";
         $formSql .= "     form_id=?,";
         $formSql .= "     pid=?,";
+        $formSql .= "     user=?,";
+        $formSql .= "     groupname=?,";
         $formSql .= "     formdir='vitals'";
 
         $formResults = sqlInsert(
@@ -223,7 +225,9 @@ class PatientService extends BaseService
             array(
                 $eid,
                 $vitalResults,
-                $pid
+                $pid,
+                $data['username'],
+                $data['groupname']
             )
         );
 
