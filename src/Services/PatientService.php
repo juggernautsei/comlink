@@ -119,6 +119,7 @@ class PatientService extends BaseService
 
             $sql_user= sqlQuery("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
 
+
             $d['facility']=$sql_user['name'];
             $d['facility_id']=$sql_user['facility_id'];
 
@@ -161,6 +162,9 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp']=$re_in_total;
         echo json_encode($re);
+die;
+
+
      }
      private function insertVital($pid, $eid, $data)
     {
