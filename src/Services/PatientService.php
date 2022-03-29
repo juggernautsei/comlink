@@ -113,21 +113,24 @@ class PatientService extends BaseService
         $re_in_total=[];
         foreach($data['bulkVitals'] as $d){
 
-// print_r($d);
-// die;
             $deviceid =$d['subDeviceID'];
             $sql= sqlQuery("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
             $pid = $sql['pid'];
 
+            $sql_user= sqlQuery("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
+
+            $d['facility']=$sql_user['name'];
+            $d['facility_id']=$sql_user['facility_id'];
+
             $sql= sqlQuery("SELECT uuid FROM `patient_data` WHERE `id`=$pid");
             $puuid = UuidRegistry::uuidToString($sql['uuid']);
-            $d['facility']="Your Clinic Name Here";
-            $d['facility_id']=1;
+
+
+
             $d['sensitivity']="normal";
             $d["onset_date"]=date('Y-m-d h:i:s');
             $d["reason"]='Vitals';
             $geteid = (new EncounterRestController())->post($puuid, $d);
-            $sql_user= sqlQuery("SELECT username FROM `users` WHERE `id`=1");
 
 
             $sql= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
@@ -182,7 +185,7 @@ die;
         $vitalSql .= "     oxygen_saturation=?,";
         $vitalSql .= "     user=?,";
         $vitalSql .= "     groupname=?";
-//temp_method
+
         $vitalResults = sqlInsert(
             $vitalSql,
             array(
