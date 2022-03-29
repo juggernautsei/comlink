@@ -114,17 +114,15 @@ class PatientService extends BaseService
         foreach($data['bulkVitals'] as $d){
 
             $deviceid =$d['subDeviceID'];
-            $sql= sqlQuery("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
-            $pid = $sql['pid'];
+            $getpatientid= sqlQuery("SELECT pid FROM patient_devices_list WHERE deviceid='$deviceid'");
+            $pid = $getpatientid['pid'];
 
-            $sql_user= sqlQuery("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
+            $getuser_facility= sqlQuery("SELECT facility.`name`, users.username, users.facility_id FROM users INNER JOIN facility ON users.facility_id=facility.id where users.`id`=1");
+            $d['facility']=$getuser_facility['name'];
+            $d['facility_id']=$getuser_facility['facility_id'];
 
-
-            $d['facility']=$sql_user['name'];
-            $d['facility_id']=$sql_user['facility_id'];
-
-            $sql= sqlQuery("SELECT uuid FROM `patient_data` WHERE `id`=$pid");
-            $puuid = UuidRegistry::uuidToString($sql['uuid']);
+            $getuuid= sqlQuery("SELECT uuid FROM `patient_data` WHERE `id`=$pid");
+            $puuid = UuidRegistry::uuidToString($getuuid['uuid']);
 
 
 
@@ -134,9 +132,8 @@ class PatientService extends BaseService
             $geteid = (new EncounterRestController())->post($puuid, $d);
 
 
-            $sql= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
-            $eid =$sql['LastID'];
-            $d['username'] =$sql_user['username'];
+            $getform_encounter= sqlQuery("SELECT MAX(ID) AS LastID FROM form_encounter");
+            $d['username'] =$getuser_facility['username'];
             $d['groupname'] ='Default';
             $d['bps']=$d['vitalsData']['ctsiSystolic'];
             $d['bpd']=$d['vitalsData']['ctsiDiastolic'];
@@ -152,7 +149,7 @@ class PatientService extends BaseService
             $d['oxygen_saturation']=$d['vitalsData']['ctsiSpo2'];
             $d['temp_method']="Device";
 
-            $serviceResult = $this->insertVital($pid, $eid, $d);
+            $serviceResult = $this->insertVital($pid, $getform_encounter['LastID'], $d);
             $re_in['actionCode']='ADD';
             $re_in['errorCode']='200';
             $re_in['errorDesc']='Success';
@@ -162,8 +159,6 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp']=$re_in_total;
         echo json_encode($re);
-die;
-
 
      }
      private function insertVital($pid, $eid, $data)
