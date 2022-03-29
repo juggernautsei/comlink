@@ -56,6 +56,8 @@ class FhirPatientBulkUploadRestController
         // }
 
         $processingResult = $this->fhirPatientBulkService->insert($fhirJson);
+
+        die;
         return RestControllerHelper::handleFhirProcessingResult($processingResult, 201);
     }
 

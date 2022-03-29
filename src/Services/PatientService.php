@@ -161,9 +161,6 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp']=$re_in_total;
         echo json_encode($re);
-die;
-
-
      }
      private function insertVital($pid, $eid, $data)
     {
