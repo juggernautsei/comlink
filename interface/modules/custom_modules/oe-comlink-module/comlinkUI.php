@@ -206,8 +206,6 @@ use OpenEMR\Core\Header;
                 class="fa fa-plus"><?php echo xlt(' Add Patients'); ?></i></a>
         <a href="#" class="btn btn-secondary" onclick="bulk_upload()" style="margin-top:10px;"><i class="fa fa-plus"
                 name="bulk_upload" id="bulk_upload"><?php echo xlt(' Bulk Upload'); ?></i></a>
-                <!-- <a href="#" class="btn btn-secondary" onclick="patients_bulk_upload()" style="margin-top:10px;"><i class="fa fa-plus"
-                name="patients_bulk_upload" id="patients_bulk_upload"><?php echo xlt('Add Bulk Patients'); ?></i></a> -->
 
 
     </div>
