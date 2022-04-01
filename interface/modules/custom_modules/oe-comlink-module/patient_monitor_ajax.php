@@ -9,7 +9,7 @@ $res = sqlStatement($query);
 while ($row = sqlFetchArray($res)) {
 
 
-    $form_vitals = "SELECT `bps`, `bpd`, `height`, `weight`, `temperature`, `respiration`, `oxygen_saturation` FROM form_vitals WHERE pid = " . $row['pid'];
+    $form_vitals = "SELECT `bps`, `bpd`, `height`, `weight`, `temperature`, `respiration`, `oxygen_saturation` FROM form_vitals WHERE `pid` = " . $row['pid'] . " ORDER BY `id` DESC";
     $form_vitalsres = sqlStatement($form_vitals);
     $form_vitalsrow = sqlFetchArray($form_vitalsres);
 
