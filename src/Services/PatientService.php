@@ -143,6 +143,7 @@ class PatientService extends BaseService
             $d['sensitivity']="normal";
             $d["onset_date"]=date('Y-m-d h:i:s');
             $d["reason"]='Vitals';
+            $d['provider_id']="1";
             $geteid = (new EncounterRestController())->post($puuid, $d);
             $getform_encounter_id= self::getform_encounter_id();
 
@@ -161,6 +162,7 @@ class PatientService extends BaseService
             $d['head_circ']="";
             $d['oxygen_saturation']=$d['vitalsData']['ctsiSpo2'];
             $d['temp_method']="Device";
+
 
             $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['LastID'], $d);
             $re_in['actionCode']='ADD';
