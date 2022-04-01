@@ -18,7 +18,7 @@ use OpenEMR\Core\Header;
 <!DOCTYPE html>
 
 <head>
-    <?php Header::setupHeader(['report-helper', 'common', 'datatables']); ?>
+    <?php Header::setupHeader(['report-helper', 'common']); ?>
     <meta charset="utf-8" />
     <title><?php echo xlt('Patient Monitoring'); ?></title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
