@@ -144,6 +144,8 @@ class PatientService extends BaseService
             $d["onset_date"]=date('Y-m-d h:i:s');
             $d["reason"]='Vitals';
             $d['provider_id']="1";
+            $b['billing_facility'] = "3";
+
             $geteid = (new EncounterRestController())->post($puuid, $d);
             $getform_encounter_id= self::getform_encounter_id();
 
