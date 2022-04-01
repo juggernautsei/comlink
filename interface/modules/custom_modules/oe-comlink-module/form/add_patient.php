@@ -9,7 +9,7 @@
  */
 
 require_once dirname(__FILE__, 5) . "/globals.php";
-require_once dirname(__FILE__, 2)."/controller/Container.php";
+require_once dirname(__FILE__, 2) . "/controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Core\Header;
@@ -26,13 +26,13 @@ if ($_POST) {
     if ($_POST['pro'] == "autocomplete") {
         $search_list = [];
         $type = $_POST['type'];
-        if($type == 'name'){
+        if ($type == 'name') {
             $sql='SELECT `lname`,`fname` FROM `patient_data`';
             $list = sqlStatement($sql);
             while ($row = sqlFetchArray($list)) {
-                $search_list[] = $row['lname'].", ".$row['fname'];
+                $search_list[] = $row['lname'] . ", " . $row['fname'];
             }
-        }else{
+        } else {
             $sql='SELECT `pid` FROM `patient_data`';
             $list = sqlStatement($sql);
             while ($row = sqlFetchArray($list)) {
@@ -40,7 +40,7 @@ if ($_POST) {
             }
         }
 
-        echo(json_encode($search_list));
+        echo (json_encode($search_list));
     }
 } else {
 ?>
@@ -48,7 +48,7 @@ if ($_POST) {
 <head>
     <?php Header::setupHeader(['report-helper','opener']); ?>
     <meta charset="utf-8" />
-    <title><?php echo xlt('Add Patients');?></title>
+    <title><?php echo xlt('Add Patients'); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
@@ -56,10 +56,11 @@ if ($_POST) {
         let title = '<?php echo xlt('Patient Search'); ?>';
         dlgopen( '<? echo dirname(__FILE__,5) ?>\main\calendar\find_patient_popup.php', '_blank', 650, 300, '', title);
     }
-    var $disabledResults = $(".js-example-disabled-results");
+
+    const $disabledResults = $(".js-example-disabled-results");
     $disabledResults.select2();
     </script>
-    <style type="text/css">
+    <style>
         .autocomplete-items {
         position: absolute;
         border: 1px solid #d4d4d4;
@@ -108,7 +109,7 @@ if ($_POST) {
             <label for='form_title'><?php echo xlt('Provider'); ?>:</label>
             <select class='form-control' name='provider' id='provider'>
                 <?php
-                foreach($providers as $provider) {
+                foreach ($providers as $provider) {
                     if($provider['fname']){
                         echo "<option value='" . $provider['id'] . "'>" . $provider['lname'] . ", " . $provider['fname']."</option>";
                     }else{
@@ -124,7 +125,7 @@ if ($_POST) {
             <select class='form-control js-example-disabled-results' name='pid' id='pid' required>
                 <option value="" hidden>Select patient</option>
                 <?php
-                foreach($patients as $patient) {
+                foreach ($patients as $patient) {
                      echo "<option value='" . $patient['pid'] . "'>" . $patient['lname'] . "</option>";
 
                 }
