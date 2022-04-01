@@ -8,7 +8,7 @@
  *
  */
 
-require_once "../../../../globals.php";
+require_once dirname(__FILE__, 5) . "/globals.php";
 require_once dirname(__FILE__, 2)."/controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;
@@ -22,8 +22,8 @@ $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
 
-if($_POST){
-    if($_POST['pro'] == "autocomplete"){
+if ($_POST) {
+    if ($_POST['pro'] == "autocomplete") {
         $search_list = [];
         $type = $_POST['type'];
         if($type == 'name'){
@@ -42,11 +42,7 @@ if($_POST){
 
         echo(json_encode($search_list));
     }
-
-
-
-
-}else{
+} else {
 ?>
 <!DOCTYPE html>
 <head>
@@ -103,7 +99,7 @@ if($_POST){
             <select class='form-control' name='facility' id='facility'>
                 <?php
                 foreach($facilities as $facility) {
-                    echo "<option value='".$facility['id']."'>".$facility['name']."</option>";
+                    echo "<option value='".$facility['id']."'>".$facility['name'] . "</option>";
                 }
                 ?>
             </select>
@@ -114,9 +110,9 @@ if($_POST){
                 <?php
                 foreach($providers as $provider) {
                     if($provider['fname']){
-                        echo "<option value='".$provider['id']."'>".$provider['lname'].", ".$provider['fname']."</option>";
+                        echo "<option value='" . $provider['id'] . "'>" . $provider['lname'] . ", " . $provider['fname']."</option>";
                     }else{
-                        echo "<option value='".$provider['id']."'>".$provider['lname']."</option>";
+                        echo "<option value='" . $provider['id'] . "'>" . $provider['lname'] . "</option>";
                     }
                 }
                 ?>
@@ -129,7 +125,7 @@ if($_POST){
                 <option value="" hidden>Select patient</option>
                 <?php
                 foreach($patients as $patient) {
-                     echo "<option value='".$patient['pid']."'>".$patient['lname']."</option>";
+                     echo "<option value='" . $patient['pid'] . "'>" . $patient['lname'] . "</option>";
 
                 }
                 ?>
