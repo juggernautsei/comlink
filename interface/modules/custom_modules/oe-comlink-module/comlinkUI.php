@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../../globals.php";
+require_once dirname(__FILE__, 4) . "/globals.php";
 require_once dirname(__FILE__) . "/controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;

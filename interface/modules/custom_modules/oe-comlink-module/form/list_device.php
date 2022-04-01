@@ -1,5 +1,13 @@
 <?php
 
+/*
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
 require_once "../../../../globals.php";
 require_once "../controller/Container.php";
 
@@ -10,7 +18,7 @@ use OpenEMR\Core\Header;
 <!DOCTYPE html>
 
 <head>
-    <?php Header::setupHeader(['report-helper', 'common']); ?>
+    <?php Header::setupHeader(['report-helper', 'common', 'datatables']); ?>
     <meta charset="utf-8" />
     <title><?php echo xlt('Patient Monitoring'); ?></title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
