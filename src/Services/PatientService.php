@@ -123,7 +123,7 @@ class PatientService extends BaseService
     }
     public static function getform_encounter_id()
     {
-        $rez = sqlStatement("SELECT MAX(ID) AS LastID FROM form_encounter");
+        $rez = sqlStatement("SELECT MAX(ID) AS LastID, `encounter` FROM `form_encounter`");
         return $rez;
     }
      public function insertbulkpatient($data){
@@ -166,7 +166,7 @@ class PatientService extends BaseService
             $d['temp_method'] = "Device";
 
 
-            $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['LastID'], $d);
+            $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['encounter'], $d);
             file_put_contents("/var/www/html/dataDump/enc.txt", $getform_encounter_id->fields['LastID']);
             $re_in['actionCode'] = 'ADD';
             $re_in['errorCode'] = '200';
