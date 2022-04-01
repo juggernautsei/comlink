@@ -20,7 +20,7 @@ use OpenEMR\Common\Uuid\UuidRegistry;
 use OpenEMR\Validators\PatientValidator;
 use OpenEMR\Validators\ProcessingResult;
 use OpenEMR\RestControllers\EncounterRestController;
-use OpenEMR\Services\EncounterService;
+
 class PatientService extends BaseService
 {
     const TABLE_NAME = 'patient_data';
@@ -165,9 +165,7 @@ class PatientService extends BaseService
             $d['oxygen_saturation'] = $d['vitalsData']['ctsiSpo2'];
             $d['temp_method'] = "Device";
 
-
             $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['encounter'], $d);
-            file_put_contents("/var/www/html/dataDump/enc.txt", $getform_encounter_id->fields['encounter']);
             $re_in['actionCode'] = 'ADD';
             $re_in['errorCode'] = '200';
             $re_in['errorDesc'] = 'Success';
@@ -177,7 +175,6 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp'] = $re_in_total;
         echo json_encode($re);
-
      }
      private function insertVital($pid, $eid, $data)
     {
@@ -250,6 +247,7 @@ class PatientService extends BaseService
 
         return array($vitalResults, $formResults);
     }
+
     public function insert($data)
     {
 
