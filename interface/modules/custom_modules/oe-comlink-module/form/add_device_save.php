@@ -1,4 +1,13 @@
 <?php
+
+/*
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
 require_once "../../../../globals.php";
 require_once "../includes/api.php";
 $pid=$_POST['pid'];
@@ -19,8 +28,8 @@ while ($row = sqlFetchArray($res)) {
 
     $fname=$row['fname'];
     $lname=$row['lname'];
-    
-    
+
+
 }
 
 
@@ -51,5 +60,5 @@ if($reponse->errorCode==200 &&$reponse->errorDesc=='OK'){
 }else{
     echo 'Somthing Went Wrong '.$reponse->errorDesc;
 }
-    
+
 }

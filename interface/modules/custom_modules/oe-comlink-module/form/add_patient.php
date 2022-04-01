@@ -1,5 +1,13 @@
 <?php
 
+/*
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
 require_once "../../../../globals.php";
 require_once dirname(__FILE__, 2)."/controller/Container.php";
 
@@ -13,7 +21,7 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-// print_r($patient);die;
+
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
@@ -31,12 +39,12 @@ if($_POST){
                 $search_list[] = $row['pid'];
             }
         }
-       
+
         echo(json_encode($search_list));
     }
 
-    
-    
+
+
 
 }else{
 ?>
@@ -69,20 +77,20 @@ if($_POST){
         .autocomplete-items div {
         padding: 10px;
         cursor: pointer;
-        background-color: #fff; 
-        border-bottom: 1px solid #d4d4d4; 
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
         position: static;
         }
 
         /*when hovering an item:*/
         .autocomplete-items div:hover {
-        background-color: #e9e9e9; 
+        background-color: #e9e9e9;
         }
 
         /*when navigating through the items using the arrow keys:*/
         .autocomplete-active {
-        background-color: DodgerBlue !important; 
-        color: #ffffff; 
+        background-color: DodgerBlue !important;
+        color: #ffffff;
         }
     </style>
 </head>
@@ -93,37 +101,37 @@ if($_POST){
         <div class="col-sm form-group">
             <label for='form_facility'><?php echo xlt('Facility'); ?>:</label>
             <select class='form-control' name='facility' id='facility'>
-                <?php 
+                <?php
                 foreach($facilities as $facility) {
                     echo "<option value='".$facility['id']."'>".$facility['name']."</option>";
-                }              
+                }
                 ?>
             </select>
         </div>
         <div class="col-sm form-group">
             <label for='form_title'><?php echo xlt('Provider'); ?>:</label>
             <select class='form-control' name='provider' id='provider'>
-                <?php 
+                <?php
                 foreach($providers as $provider) {
                     if($provider['fname']){
                         echo "<option value='".$provider['id']."'>".$provider['lname'].", ".$provider['fname']."</option>";
                     }else{
                         echo "<option value='".$provider['id']."'>".$provider['lname']."</option>";
-                    }   
-                }              
+                    }
+                }
                 ?>
             </select>
         </div>
         <div class="col-sm form-group">
             <label for='form_title'><?php echo xlt('Select Patient'); ?>:</label>
-            
+
             <select class='form-control js-example-disabled-results' name='pid' id='pid' required>
                 <option value="" hidden>Select patient</option>
-                <?php 
+                <?php
                 foreach($patients as $patient) {
                      echo "<option value='".$patient['pid']."'>".$patient['lname']."</option>";
-                   
-                }              
+
+                }
                 ?>
             </select>
         </div>
@@ -131,7 +139,7 @@ if($_POST){
     <div class="form-row mx-2">
         <div class="col-sm form-group">
             <label for='form_facility'><?php echo xlt('Weight'); ?>:</label>
-            
+
             <input class='form-control' type='text' name='weight' id='weight' autocomplete="off"
                     placeholder='<?php echo xla('Enter Your Weight'); ?>' value="0"/>
         </div>
@@ -157,7 +165,7 @@ if($_POST){
             <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
 
             <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
-                
+
                 placeholder='<?php echo xla('Enter Blood Pressure Lower'); ?>' value="0"/>
         </div>
          <div class="col-sm form-group">
@@ -165,7 +173,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Temprature Upper'); ?>:</label>
 
                 <input class='form-control' type='text' name='temp_upper' id='temp_upper' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Temprature Upper'); ?>' value="0"/>
             </div>
         </div>
@@ -174,18 +182,18 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Temprature Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='temp_lower' id='temp_lower' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Temprature Lower'); ?>' />
             </div>
         </div>
     </div>
-       
+
     <div class="form-row mx-2">
         <div class="col-sm form-group">
             <label for='form_facility'><?php echo xlt('Blood Sugar Upper'); ?>:</label>
 
             <input class='form-control' type='text' name='bs_upper' id='bs_upper' autocomplete="off"
-                
+
                 placeholder='<?php echo xla('Enter Blood Sugar Upper'); ?>' />
         </div>
         <div class="col-sm form-group">
@@ -193,7 +201,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Blood Sugar Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='bs_lower' id='bs_lower' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Blood Sugar Lower'); ?>' />
             </div>
         </div>
@@ -202,7 +210,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Respiratory Upper'); ?>:</label>
 
                 <input class='form-control' type='text' name='resp_upper' id='resp_upper' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Respiratory Upper'); ?>' />
             </div>
         </div>
@@ -212,7 +220,7 @@ if($_POST){
             <label for='form_facility'><?php echo xlt('Respiratory Lower'); ?>:</label>
 
             <input class='form-control' type='text' name='resp_lower' id='resp_lower' autocomplete="off"
-                
+
                 placeholder='<?php echo xla('Enter Respiratory Lower'); ?>' />
         </div>
          <div class="col-sm form-group">
@@ -220,7 +228,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Oxygen Upper'); ?>:</label>
 
                 <input class='form-control' type='text' name='oxy_upper' id='oxy_upper' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Oxygen Upper'); ?>' />
             </div>
         </div>
@@ -229,11 +237,11 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('Oxygen Lower'); ?>:</label>
 
                 <input class='form-control' type='text' name='oxy_lower' id='oxy_lower' autocomplete="off"
-                    
+
                     placeholder='<?php echo xla('Enter Oxygen Lower'); ?>' />
             </div>
         </div>
-        
+
     </div>
     <div class="form-row mx-2">
         <div class="col-sm form-group">
@@ -252,20 +260,16 @@ if($_POST){
         </div>
         <div class="col-sm form-group">
             <div class="col-sm form-group">
-                 <label for='form_facility'><?php echo xlt('Select Alert'); ?>:</label>
-
-                <select class='form-control' name='alert' id='alert'>
-                    <option value="Monitored">Monitored</option> 
-                    <option value="Need Attention">Need Attention</option> 
-                    
-                </select>
+                    <label for='form_facility'><?php echo xlt('Select Alert'); ?>:</label>
+                    <select class='form-control' name='alert' id='alert'>
+                        <option value="Monitored">Monitored</option>
+                        <option value="Need Attention">Need Attention</option>
+                    </select>
             </div>
         </div>
-        
+
     </div>
-       
-    
-           
+
     <div class="form-row mx-2 mt-3">
         <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="submit" name="form_save" id="form_save" value="Add Patient">
         <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type="button" id="cancel" onclick="dlgclose()" value="Cancel">
@@ -278,14 +282,14 @@ var $disabledResults = $("#pid");
 $disabledResults.select2();
 
 $('.js-example-disabled-results').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
-    var height=document.getElementById('height');
-    var weight=document.getElementById('weight');
-    var temp_upper=document.getElementById('temp_upper');
-    var bp_upper=document.getElementById('bp_upper');
-    var bp_lower=document.getElementById('bp_lower');
-    var oxy_upper=document.getElementById('oxy_upper');
+    const optionSelected = $("option:selected", this);
+    const valueSelected = this.value;
+    const height = document.getElementById('height');
+    const weight = document.getElementById('weight');
+    const temp_upper = document.getElementById('temp_upper');
+    const bp_upper = document.getElementById('bp_upper');
+    const bp_lower = document.getElementById('bp_lower');
+    const oxy_upper = document.getElementById('oxy_upper');
     if(valueSelected){
         $.ajax({
             type: 'post',
@@ -303,17 +307,15 @@ $('.js-example-disabled-results').on('change', function (e) {
                 bp_lower.value=results.bpd?results.bpd:0;
                 oxy_upper.value=results.oxygen_saturation?results.oxygen_saturation:0;
             }
-        }); 
+        });
     }
-    
-    
+
+
 });
 
 $(function() {
     $('form').on('submit', function(e) {
-
         e.preventDefault();
-
         $.ajax({
             type: 'post',
             url: 'add_patient_save.php',
@@ -326,32 +328,31 @@ $(function() {
                 location.reload();
             }
         });
-
     });
-
 });
+
 function autocomplete(inp, arr) {
-  var currentFocus;
-  
-  inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      closeAllLists();
+    let currentFocus;
+
+    inp.addEventListener("input", function(e) {
+        let a, b, i, val = this.value;
+        closeAllLists();
       if (!val) { return false;}
       currentFocus = -1;
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
       this.parentNode.appendChild(a);
-      
+
       for (i = 0; i < arr.length; i++) {
-       
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-         
+
+        if (arr[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
+
           b = document.createElement("DIV");
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
+          b.innerHTML = "<strong>" + arr[i].substring(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substring(val.length);
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          
+
           b.addEventListener("click", function(e) {
               inp.value = this.getElementsByTagName("input")[0].value;
               closeAllLists();
@@ -361,12 +362,12 @@ function autocomplete(inp, arr) {
       }
   });
   inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
+      let x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
         currentFocus++;
         addActive(x);
-      } else if (e.keyCode == 38) { 
+      } else if (e.keyCode == 38) {
         currentFocus--;
         addActive(x);
       } else if (e.keyCode == 13) {
@@ -384,13 +385,13 @@ function autocomplete(inp, arr) {
     x[currentFocus].classList.add("autocomplete-active");
   }
   function removeActive(x) {
-    for (var i = 0; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
       x[i].classList.remove("autocomplete-active");
     }
   }
   function closeAllLists(elmnt) {
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
+      const x = document.getElementsByClassName("autocomplete-items");
+      for (let i = 0; i < x.length; i++) {
       if (elmnt != x[i] && elmnt != inp) {
         x[i].parentNode.removeChild(x[i]);
       }
@@ -403,47 +404,45 @@ function autocomplete(inp, arr) {
 
 
 function onChange(){
-    var search_list = [];
-    var search = document.getElementById("form_search").value;
-    var pro = "autocomplete";
+    let search_list = [];
+    const search = document.getElementById("form_search").value;
+    const pro = "autocomplete";
 
     $.ajax({
-            type: 'POST', 
-            url: "add_patient.php", 
-            dataType:'text', 
-            data:{pro:pro ,type:search}, 
+            type: 'POST',
+            url: "add_patient.php",
+            dataType:'text',
+            data:{pro:pro ,type:search},
             async: false,
             success:function(response){
                 console.log(response);
-                result = JSON.parse(response);
+                const result = JSON.parse(response);
                 search_list = result;
                 console.log(search_list);
             },
             error:function (xhr, ajaxOptions, thrownError){
-                alert(xhr + " " + ajaxOptions + " " + thrownError); 
+                alert(xhr + " " + ajaxOptions + " " + thrownError);
             }
         });
         autocomplete(document.getElementById("search_name"), search_list);
 }
 window.onload = onChange();
-function addName(){
-    var search = document.getElementById("form_search").value;
-    var sel_search = document.getElementById("search_name").value;
-    var data = "pro=add&type="+search;
+function addName() {
+    const search = document.getElementById("form_search").value;
+    const sel_search = document.getElementById("search_name").value;
+    const data = "pro=add&type=" + search;
     $.ajax({
-            type: 'POST', 
-            url: "add_patient.php", 
-            dataType:'text', 
-            data:data, 
+            type: 'POST',
+            url: "add_patient.php",
+            dataType:'text',
+            data:data,
             async: false,
             success:function(response){
-                // console.log(response);
-                result = JSON.parse(response);
-                search_list = result;
-                // console.log(search_list);
+                const result = JSON.parse(response);
+                const search_list = result;
             },
             error:function (xhr, ajaxOptions, thrownError){
-                alert(xhr + " " + ajaxOptions + " " + thrownError); 
+                alert(xhr + " " + ajaxOptions + " " + thrownError);
             }
         });
 }

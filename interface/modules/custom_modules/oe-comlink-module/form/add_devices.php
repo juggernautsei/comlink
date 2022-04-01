@@ -1,5 +1,13 @@
 <?php
 
+/**
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
 require_once "../../../../globals.php";
 require_once dirname(__FILE__, 2)."/controller/Container.php";
 
@@ -31,12 +39,12 @@ if($_POST){
                 $search_list[] = $row['pid'];
             }
         }
-       
+
         echo(json_encode($search_list));
     }
 
-    
-    
+
+
 
 }else{
 ?>
