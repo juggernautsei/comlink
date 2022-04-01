@@ -167,6 +167,7 @@ class PatientService extends BaseService
 
 
             $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['LastID'], $d);
+            file_put_contents("/var/www/html/dataDump/enc.txt", $getform_encounter_id->fields['LastID']);
             $re_in['actionCode'] = 'ADD';
             $re_in['errorCode'] = '200';
             $re_in['errorDesc'] = 'Success';
@@ -181,23 +182,23 @@ class PatientService extends BaseService
      private function insertVital($pid, $eid, $data)
     {
         $vitalSql  = " INSERT INTO form_vitals SET";
-        $vitalSql .= "     date=NOW(),";
-        $vitalSql .= "     activity=1,";
-        $vitalSql .= "     pid=?,";
-        $vitalSql .= "     bps=?,";
-        $vitalSql .= "     bpd=?,";
-        $vitalSql .= "     weight=?,";
-        $vitalSql .= "     height=?,";
-        $vitalSql .= "     temperature=?,";
-        $vitalSql .= "     temp_method=?,";
-        $vitalSql .= "     pulse=?,";
-        $vitalSql .= "     respiration=?,";
-        $vitalSql .= "     note=?,";
-        $vitalSql .= "     waist_circ=?,";
-        $vitalSql .= "     head_circ=?,";
-        $vitalSql .= "     oxygen_saturation=?,";
-        $vitalSql .= "     user=?,";
-        $vitalSql .= "     groupname=?";
+        $vitalSql .= "     date = NOW(),";
+        $vitalSql .= "     activity = 1,";
+        $vitalSql .= "     pid = ?,";
+        $vitalSql .= "     bps = ?,";
+        $vitalSql .= "     bpd = ?,";
+        $vitalSql .= "     weight = ?,";
+        $vitalSql .= "     height = ?,";
+        $vitalSql .= "     temperature = ?,";
+        $vitalSql .= "     temp_method = ?,";
+        $vitalSql .= "     pulse = ?,";
+        $vitalSql .= "     respiration = ?,";
+        $vitalSql .= "     note = ?,";
+        $vitalSql .= "     waist_circ = ?,";
+        $vitalSql .= "     head_circ = ?,";
+        $vitalSql .= "     oxygen_saturation = ?,";
+        $vitalSql .= "     user = ?,";
+        $vitalSql .= "     groupname = ?";
 
         $vitalResults = sqlInsert(
             $vitalSql,
@@ -226,15 +227,15 @@ class PatientService extends BaseService
         }
 
         $formSql = "INSERT INTO forms SET";
-        $formSql .= "     date=NOW(),";
-        $formSql .= "     encounter=?,";
-        $formSql .= "     form_name='Vitals',";
-        $formSql .= "     authorized='1',";
-        $formSql .= "     form_id=?,";
-        $formSql .= "     pid=?,";
-        $formSql .= "     user=?,";
-        $formSql .= "     groupname=?,";
-        $formSql .= "     formdir='vitals'";
+        $formSql .= "     date = NOW(),";
+        $formSql .= "     encounter = ?,";
+        $formSql .= "     form_name = 'Vitals',";
+        $formSql .= "     authorized = '1',";
+        $formSql .= "     form_id = ?,";
+        $formSql .= "     pid = ?,";
+        $formSql .= "     user = ?,";
+        $formSql .= "     groupname = ?,";
+        $formSql .= "     formdir = 'vitals'";
 
         $formResults = sqlInsert(
             $formSql,
