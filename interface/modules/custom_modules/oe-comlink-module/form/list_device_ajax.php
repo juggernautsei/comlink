@@ -8,7 +8,7 @@
  *
  */
 
-require_once "../../../../globals.php";
+require_once dirname(__FILE__, 5) . "/globals.php";
 
 $pid= $_GET['pid'];
 $query = "SELECT * FROM patient_devices_list WHERE pid=$pid";
@@ -26,13 +26,11 @@ while ($row = sqlFetchArray($res)) {
         $row['devicemodal'],
         $row['devicemaker'],
         $row['deviceos'],
-        '<button class="btn btn-success edit-btn" id="edit" data-id="'.$id.'">edit</button><button id="delete" data-id="'.$id.'" class="btn btn-danger ml-2">Delete</button>',
-
+        '<button class="btn btn-success edit-btn" id="edit" data-id="' . $id . '">edit</button><button id="delete" data-id="' . $id . '" class="btn btn-danger ml-2">Delete</button>',
 
     ];
     $i++;
     $x++;
-
 }
 
-echo json_encode($dataarray);die;
+echo json_encode($dataarray); die;

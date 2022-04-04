@@ -48,16 +48,12 @@ class FhirPatientBulkUploadRestController
      */
     public function post($fhirJson)
     {
-
-
-        // $fhirValidate = $this->fhirValidate->validate($fhirJson);
-        // if (!empty($fhirValidate)) {
-        //     return RestControllerHelper::responseHandler($fhirValidate, null, 400);
-        // }
+         $fhirValidate = $this->fhirValidate->validate($fhirJson);
+         if (!empty($fhirValidate)) {
+             return RestControllerHelper::responseHandler($fhirValidate, null, 400);
+         }
 
         $processingResult = $this->fhirPatientBulkService->insert($fhirJson);
-
-        die;
         return RestControllerHelper::handleFhirProcessingResult($processingResult, 201);
     }
 
