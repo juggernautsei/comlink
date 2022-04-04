@@ -7,6 +7,9 @@
  *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
  *
  */
+$ignoreAuth = true;
+// Set $sessionAllowWrite to true to prevent session concurrency issues during authorization related code
+$sessionAllowWrite = true;
 
 require_once "../../../../globals.php";
 require_once "../includes/api.php";
