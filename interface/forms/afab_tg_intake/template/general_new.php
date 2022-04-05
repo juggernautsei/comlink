@@ -209,7 +209,7 @@ use OpenEMR\Core\Header;
 			</td>
 		</tr>
 		<tr valign="top">
-			<td colspan="9" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font face="Calibri, serif"><font size="2" style="font-size: 11pt">Partners:
 				within the past year</font></font></p>
 			</td>
@@ -224,7 +224,7 @@ use OpenEMR\Core\Header;
 			</td>
 		</tr>
 		<tr valign="top">
-			<td colspan="9" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font face="Calibri, serif"><font size="2" style="font-size: 11pt">Practices:</font></font></p>
 			</td>
 			<td width="376" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
@@ -238,7 +238,7 @@ use OpenEMR\Core\Header;
 			</td>
 		</tr>
 		<tr valign="top">
-			<td colspan="9" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" height="7" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font face="Calibri, serif"><font size="2" style="font-size: 11pt">STI
 				protection:</font></font></p>
 			</td>
