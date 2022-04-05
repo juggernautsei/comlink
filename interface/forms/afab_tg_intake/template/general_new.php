@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__, 4) . "globals.php";
+require_once dirname(__FILE__, 4) . "/globals.php";
 
 use OpenEMR\Core\Header;
 
@@ -10,7 +10,8 @@ use OpenEMR\Core\Header;
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
-	<title></title>
+	<title><?php echo xlt("Transhealth Intake"); ?></title>
+    <?php Header::setupHeader('common'); ?>
 	<meta name="generator" content="LibreOffice 7.2.5.2 (Windows)"/>
 	<meta name="author" content="Jennifer Gallienne"/>
 	<meta name="created" content="2021-10-13T16:09:00"/>
