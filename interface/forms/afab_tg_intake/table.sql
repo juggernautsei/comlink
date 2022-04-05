@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS `form_afab_tg_intake` (
     `groupname` varchar(255) default NULL,
     `authorized` tinyint(4) default 0,
     `activity` tinyint(4) default 0,
-    `data` text
+    `data` text,
     PRIMARY KEY (id)
     ) ENGINE=InnoDB;
