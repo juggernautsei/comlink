@@ -12,8 +12,8 @@
 require_once(__DIR__ . "/../../globals.php");
 require_once("$srcdir/api.inc");
 
-require("C_FormTranshealthIntake.class.php");
+//require("C_FormTranshealthIntake.class.php");
 
-$c = new C_FormTranshealthIntake();
-echo $c->default_action();
-
+//$c = new C_FormTranshealthIntake();
+//echo $c->default_action();
+require_once "template/general_new.html";
