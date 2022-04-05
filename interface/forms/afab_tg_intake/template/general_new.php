@@ -28,7 +28,7 @@ use OpenEMR\Core\Header;
 </head>
 <body lang="en-US" link="#0000ff" vlink="#800000" dir="ltr">
 <div class="container-lg">
-<div class="m-5" title="header"><p style="line-height: 100%; margin-bottom: 0in"><?php echo xlt("HEALTH	BRIGADE TRANSHEALTH INTAKE"); ?>
+<div class="m-5" title="header"><p style="line-height: 100%; margin-top: 20px"><?php echo xlt("HEALTH	BRIGADE TRANSHEALTH INTAKE"); ?>
 	 <b>Client Name:</b>      <b>Today&rsquo;s date:</b>
 	</p>
 	<p style="margin-bottom: 0.26in"><br/>
