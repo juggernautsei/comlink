@@ -55,8 +55,8 @@ class C_FormTranshealthIntake extends Controller
         if ($_POST['process'] != "true") {
             return;
         }
-        $billing = new AutoBilling();
-        $billing->billingEntries($_POST['dxcode'], $_POST['cpt']);
+        //$billing = new AutoBilling();
+       // $billing->billingEntries($_POST['dxcode'], $_POST['cpt']);
 
         $this->form = new FormTranshealthIntake($_POST['id']);
         parent::populate_object($this->form);
@@ -67,7 +67,7 @@ class C_FormTranshealthIntake extends Controller
         }
 
         if (empty($_POST['id'])) {
-            addForm($GLOBALS['encounter'], "SOAP", $this->form->id, "soap", $GLOBALS['pid'], $_SESSION['userauthorized']);
+            addForm($GLOBALS['encounter'], "Transheal Intake", $this->form->id, "afab_tg_intake", $GLOBALS['pid'], $_SESSION['userauthorized']);
             $_POST['process'] = "";
         }
     }
