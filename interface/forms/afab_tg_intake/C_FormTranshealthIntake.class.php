@@ -12,13 +12,15 @@
 require_once($GLOBALS['fileroot'] . "/library/forms.inc");
 require_once("FormTranshealthIntake.class.php");
 
+use OpenEMR\Common\Csrf\CsrfUtils;
+
 class C_FormTranshealthIntake extends Controller
 {
     public $template_dir;
     /**
      * @var mixed|string
      */
-    private $termplate_mod;
+    public $termplate_mod;
 
 
     public function __construct($template_mod = "general")
