@@ -16,17 +16,17 @@ use OpenEMR\Common\Csrf\CsrfUtils;
 
 class C_FormTranshealthIntake extends Controller
 {
-    public $template_dir;
+    var $template_dir;
     /**
      * @var mixed|string
      */
-    public $termplate_mod;
+    var $template_mod;
 
 
     public function __construct($template_mod = "general")
     {
         parent::__construct();
-        $this->termplate_mod = $template_mod;
+        $this->template_mod = $template_mod;
         $this->template_dir = dirname(__FILE__) . "/templates/";
     }
 
