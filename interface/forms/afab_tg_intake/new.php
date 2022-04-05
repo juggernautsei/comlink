@@ -16,4 +16,4 @@ require_once("$srcdir/api.inc");
 
 //$c = new C_FormTranshealthIntake();
 //echo $c->default_action();
-require_once "template/general_new.html";
+require_once "template/general_new.php";
