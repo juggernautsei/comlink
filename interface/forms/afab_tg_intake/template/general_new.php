@@ -265,7 +265,7 @@ use OpenEMR\Core\Header;
 			</td>
 		</tr>
 		<tr valign="top">
-			<td colspan="9" width="346" height="22" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2; margin-bottom: 0in">
+			<td colspan="8" width="346" height="22" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2; margin-bottom: 0in">
 				<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><font color="#000000"><u><b>Anxiety
 				</b></u></font></font></font>
 				</p>
@@ -819,7 +819,7 @@ use OpenEMR\Core\Header;
 	</tbody>
 	<tbody>
 		<tr valign="top">
-			<td colspan="9" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font size="2" style="font-size: 11pt"><font color="#000000"><font face="Calibri, serif">Alcohol
 				                                                              </font></font>
 				<font face="MS Gothic, serif">&#9744;</font>Yes <font face="MS Gothic, serif">&#9744;</font>No</font></p>
@@ -834,7 +834,7 @@ use OpenEMR\Core\Header;
 	</tbody>
 	<tbody>
 		<tr valign="top">
-			<td colspan="9" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font size="2" style="font-size: 11pt"><font color="#000000"><font face="Calibri, serif">Cocaine
 
 				</font></font><font face="MS Gothic, serif">&#9744;</font>Yes <font face="MS Gothic, serif">&#9744;</font>No</font></p>
@@ -849,7 +849,7 @@ use OpenEMR\Core\Header;
 	</tbody>
 	<tbody>
 		<tr valign="top">
-			<td colspan="9" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<td colspan="8" width="346" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
 				<font size="2" style="font-size: 11pt"><font color="#000000"><font face="Calibri, serif">Cannabis
 				                                                            </font></font><font face="MS Gothic, serif">&#9744;</font>Yes
 				<font face="MS Gothic, serif">&#9744;</font>No</font></p>
