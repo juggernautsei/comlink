@@ -11,3 +11,6 @@
 echo $_GET['encounter'];
 
 
+$ssql = "DELETE FROM form_encounter WHERE `encounter` = ? ";
+
+sqlStatement($ssql, [$_GET['encounter']]);
