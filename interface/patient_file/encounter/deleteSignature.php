@@ -13,6 +13,6 @@ require_once dirname(__FILE__, 3) . "/globals.php";
 echo $_GET['encounter'];
 
 
-$ssql = "DELETE FROM `esign_signatures` WHERE `encounter` = ? ";
+$ssql = "DELETE FROM `esign_signatures` WHERE `tid` = ? ";
 
 sqlQuery($ssql, [$_GET['encounter']]);
