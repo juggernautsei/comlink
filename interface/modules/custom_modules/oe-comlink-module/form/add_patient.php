@@ -150,7 +150,7 @@ if ($_POST) {
         </div>
         <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Blood Pressure Upper'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Blood Pressure'); ?>:</label>
 
                 <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off" placeholder='<?php echo xla('Enter Blood Pressure'); ?>'/>
             </div>
@@ -254,7 +254,7 @@ if ($_POST) {
                 <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
                      placeholder='<?php echo xla('Enter Pain Lower'); ?>' value="0"/>
             </div>
-        </div>
+        </div> -->
         <div class="col-sm form-group">
             <div class="col-sm form-group">
                     <label for='form_facility'><?php echo xlt('Select Alert'); ?>:</label>
@@ -402,14 +402,14 @@ function autocomplete(inp, arr) {
 
 function onChange(){
     let search_list = [];
-    const search = document.getElementById("form_search").value;
+    const search = document.getElementById("form_search");
     const pro = "autocomplete";
 
     $.ajax({
             type: 'POST',
             url: "add_patient.php",
             dataType:'text',
-            data:{pro:pro ,type:search},
+            data:{pro:pro ,type:search.value},
             async: false,
             success:function(response){
                 console.log(response);
