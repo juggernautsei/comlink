@@ -65,28 +65,28 @@ if($count['COUNT(*)'] > 0){
                                        `pain_lower`,
                                        `alert`,
                                        `updatedAt`)
-            VALUES   ('',?, ?, ?,'1234', ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            VALUES   ('',?, ?, ?,'1234', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             sqlStatement($sql, [
-                '$pid',
-                '$facility',
-                '$provider',
-                '$weight',
-                '$height',
-                '$bp_upper',
-                '$bp_lower',
-                '$temp_upper',
-                '$temp_lower',
-                '$bs_upper',
-                '$bs_lower',
-                '$resp_upper',
-                '$resp_lower',
-                '$oxy_upper',
-                '$oxy_lower',
-                '$pain_upper',
-                '$pain_lower',
-                '$active',
-                '$date'
+                $pid,
+                $facility,
+                $provider,
+                $weight,
+                $height,
+                $bp_upper,
+                $bp_lower,
+                $temp_upper,
+                $temp_lower,
+                $bs_upper,
+                $bs_lower,
+                $resp_upper,
+                $resp_lower,
+                $oxy_upper,
+                $oxy_lower,
+                $pain_upper,
+                $pain_lower,
+                $active,
+                $date
             ]);
 
     echo "Success Insert New  Record !!!";
