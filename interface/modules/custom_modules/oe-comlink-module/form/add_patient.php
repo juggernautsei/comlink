@@ -92,7 +92,7 @@ if ($_POST) {
     </style>
 </head>
 <body >
-<form role="form" method='post' name='theform' id='theform' action='add_patient.php'>
+<form role="form" method='post' name='theform' id='theform' action='add_patient_save.php'>
      <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
     <div class="form-row mx-2">
         <div class="col-sm form-group">
