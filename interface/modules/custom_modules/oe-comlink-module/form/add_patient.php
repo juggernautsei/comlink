@@ -254,7 +254,7 @@ if ($_POST) {
                 <input class='form-control' type='text' name='pain_lower' id='pain_lower' autocomplete="off"
                      placeholder='<?php echo xla('Enter Pain Lower'); ?>' value="0"/>
             </div>
-        </div> -->
+        </div>
         <div class="col-sm form-group">
             <div class="col-sm form-group">
                     <label for='form_facility'><?php echo xlt('Select Alert'); ?>:</label>

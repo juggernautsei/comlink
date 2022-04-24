@@ -66,7 +66,8 @@ if($count['COUNT(*)'] > 0){
                                        `alert`,
                                        `updatedAt`)
             VALUES   ('',?, ?, ?,'1234', ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $bindings = [
+
+            sqlStatement($sql, [
                 '$pid',
                 '$facility',
                 '$provider',
@@ -86,8 +87,7 @@ if($count['COUNT(*)'] > 0){
                 '$pain_lower',
                 '$active',
                 '$date'
-            ];
-            sqlStatement($sql, $bindings);
+            ]);
 
     echo "Success Insert New  Record !!!";
 
