@@ -276,7 +276,7 @@ if ($_POST) {
 <script>
 
 var $disabledResults = $("#pid");
-$disabledResults.select2();
+
 
 $('.js-example-disabled-results').on('change', function (e) {
     const optionSelected = $("option:selected", this);

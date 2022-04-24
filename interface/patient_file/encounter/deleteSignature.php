@@ -16,3 +16,5 @@ echo $_GET['encounter'];
 $ssql = "DELETE FROM `esign_signatures` WHERE `tid` = ? ";
 
 sqlQuery($ssql, [$_GET['encounter']]);
+
+echo "Document is now unsigned";
