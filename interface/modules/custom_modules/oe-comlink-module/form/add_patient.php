@@ -275,7 +275,7 @@ if ($_POST) {
 </body>
 <script>
 
-var $disabledResults = $("#pid");
+//var $disabledResults = $("#pid");
 
 
 $('.js-example-disabled-results').on('change', function (e) {

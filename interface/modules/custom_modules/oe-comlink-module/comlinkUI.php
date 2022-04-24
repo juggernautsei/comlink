@@ -198,7 +198,7 @@ use OpenEMR\Core\Header;
 
     <script>
     function add_patient() {
-        var url = 'form/add_patient.php';
+        const url = 'form/add_patient.php';
         dlgopen(url, '_blank', 750, 450, '', 'Add Patient', {
             onClosed: 'reload'
         });
