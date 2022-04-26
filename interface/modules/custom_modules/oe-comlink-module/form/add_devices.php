@@ -21,7 +21,7 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-$uuid = $loadDb->getUuid($pid);
+$uuid = $loadDb->getUuid($_GET['pid']);
 //print_r($patients);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
@@ -104,7 +104,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('SubEhrEmrId'); ?>:</label>
 
                 <input class='form-control' type='text' name='sub_ehr' id='sub_ehr' autocomplete="off"
-                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $patients['uuid']; ?>" required />
+                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $uuid['uuid']; ?>" required />
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
