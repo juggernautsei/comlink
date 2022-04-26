@@ -21,7 +21,7 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-// print_r($patient);die;
+print_r($patients);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
