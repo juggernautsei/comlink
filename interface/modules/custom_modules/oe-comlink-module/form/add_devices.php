@@ -105,7 +105,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('SubEhrEmrId'); ?>:</label>
 
                 <input class='form-control' type='text' name='sub_ehr' id='sub_ehr' autocomplete="off"
-                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $uuid['uuid']; ?>" required />
+                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $uuid; ?>" required />
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
