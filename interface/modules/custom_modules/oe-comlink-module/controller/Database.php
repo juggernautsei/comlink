@@ -110,7 +110,7 @@ class Database
     }
     public function getpatientdata()
     {
-        $sql = "SELECT id, fname, lname,pid, uuid FROM patient_data";
+        $sql = "SELECT id, fname, lname,pid FROM patient_data";
         $list = sqlStatement($sql);
         $providers_list = [];
         while ($row = sqlFetchArray($list)) {
@@ -118,6 +118,11 @@ class Database
         }
 
         return $providers_list;
+    }
+    public function getUuid($pid)
+    {
+        $sql = "SELECT `uuid` FROM `patient_data` WHERE `pid` = ?";
+        return sqlQuery($sql, [$pid]);
     }
 
 }
