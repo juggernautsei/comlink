@@ -22,7 +22,8 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-$uuid = UuidRegistry::uuidToString($loadDb->getUuid($_GET['pid']));
+$u = $loadDb->getUuid($_GET['pid']);
+$uuid = UuidRegistry::uuidToString($u['uuid']);
 //print_r($patients);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
