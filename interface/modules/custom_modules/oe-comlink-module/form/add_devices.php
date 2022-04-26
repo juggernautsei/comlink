@@ -106,7 +106,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('SubEhrEmrId'); ?>:</label>
 
                 <input class='form-control' type='text' name='sub_ehr' id='sub_ehr' autocomplete="off"
-                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' required />
+                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $patients['uuid']; ?>" required />
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
@@ -118,7 +118,7 @@ if($_POST){
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Device Model'); ?>:</label>
+                    <label for='form_facility'><?php echo xlt('Device Nae'); ?>:</label>
 
                     <input class='form-control' type='text' name='device_modal' id='device_modal' autocomplete="off"
                         placeholder='<?php echo xla('Apple Watch'); ?>' required />
