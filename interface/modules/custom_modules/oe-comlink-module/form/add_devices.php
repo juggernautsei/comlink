@@ -11,6 +11,7 @@
 require_once "../../../../globals.php";
 require_once dirname(__FILE__, 2)."/controller/Container.php";
 
+use OpenEMR\Common\Uuid\UuidRegistry;
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Core\Header;
 use OpenEMR\Common\Csrf\CsrfUtils;
@@ -21,7 +22,7 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-$uuid = $loadDb->getUuid($_GET['pid']);
+$uuid = UuidRegistry::uuidToString($loadDb->getUuid($_GET['pid']));
 //print_r($patients);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
