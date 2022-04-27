@@ -58,7 +58,7 @@ $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
 $reponse = json_decode($resp);
 // print_r($reponse);die;
 if($reponse->errorCode == 200 && $reponse->errorDesc == 'OK'){
-  sqlQuery("INSERT INTO `patient_devices_list` (`id`, `pid`, `subehremrid`,`subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES
+  sqlQuery("INSERT INTO `patient_devices_list` (`id`, `pid`,`subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES
             ('','$pid','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')");
     echo 'successfully saved device..!';
 }else{
