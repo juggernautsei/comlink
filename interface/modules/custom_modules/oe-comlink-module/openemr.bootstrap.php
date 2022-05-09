@@ -56,7 +56,7 @@ function createFaxModuleGlobals(GlobalsInitializedEvent $event)
     $pass_array = array(xl('Comlink password'), 'encrypted', '', xl('Password for Comlink Account'));
 
     $event->getGlobalsService()->createSection("Comlink Device Module", "Report");
-    $setting = new GlobalSetting(xl('Comlink Account'), 'encrpyted', '', $instruct);
+    $setting = new GlobalSetting($user_array, 'encrpyted', '', $instruct);
     $event->getGlobalsService()->appendToSection("Comlink Device Module", "comlink_enable", $setting);
 }
 
