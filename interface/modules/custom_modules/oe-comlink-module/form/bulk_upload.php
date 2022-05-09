@@ -13,7 +13,7 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-// print_r($patient);die;
+
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
@@ -31,12 +31,12 @@ if($_POST){
                 $search_list[] = $row['pid'];
             }
         }
-       
+
         echo(json_encode($search_list));
     }
 
-    
-    
+
+
 
 }else{
 ?>
