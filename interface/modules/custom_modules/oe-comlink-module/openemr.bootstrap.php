@@ -49,3 +49,16 @@ function comlink_add_menu_item(MenuEvent $event)
  */
 $eventDispatcher->addListener(MenuEvent::MENU_UPDATE, 'comlink_add_menu_item');
 
+function createFaxModuleGlobals(GlobalsInitializedEvent $event)
+{
+    $instruct = xl('Enable communication with Comlink FHIR server.');
+    $user_array = array(xl('Comlink Username'), 'text', '', xl('Username for Comlink Account'));
+    $pass_array = array(xl('Comlink password'), 'encrypted', '', xl('Password for Comlink Account'));
+
+    $event->getGlobalsService()->createSection("Comlink Device Module", "Report");
+    $setting = new GlobalSetting(xl('Comlink Account'), 'encrpyted', '', $instruct);
+    $event->getGlobalsService()->appendToSection("Comlink Device Module", "comlink_enable", $setting);
+}
+
+$eventDispatcher->addListener(GlobalsInitializedEvent::EVENT_HANDLE, 'createFaxModuleGlobals');
+
