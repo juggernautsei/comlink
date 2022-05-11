@@ -24,9 +24,10 @@ class RestControllerHelper
      */
     public static function responseHandler($serviceResult, $customRespPayload, $idealStatusCode)
     {
+        // http_response_code(200);
+        // return ;
         if ($serviceResult) {
             http_response_code($idealStatusCode);
-
             if ($customRespPayload) {
                 return $customRespPayload;
             }

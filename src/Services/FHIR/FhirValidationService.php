@@ -68,7 +68,7 @@ class FhirValidationService
             $diagnostics->setValue($diagnostics_value);
             $issue->setDiagnostics($diagnostics);
         }
-        if ($expression_value) {
+        if (isset($expression_value)) {
             $expression = new FHIRCodeableConcept();
             $expression->setText($expression_value);
             $issue->setExpression($expression);
