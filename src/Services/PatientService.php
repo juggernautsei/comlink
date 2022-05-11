@@ -127,7 +127,7 @@ class PatientService extends BaseService
         return $rez;
     }
      public function insertbulkpatient($data){
-
+// echo 'sss';die;
         $re ['numRecords'] = count($data['bulkVitals']);
         $re_in = [];
         $re_in_total = [];
@@ -175,11 +175,8 @@ class PatientService extends BaseService
         }
         $re['bulkDataResp'] = $re_in_total;
         echo json_encode($re);
-<<<<<<< HEAD
-        
 
-=======
->>>>>>> d0d0592d60480e392c1a834e7ecc61bf2870193a
+
      }
      private function insertVital($pid, $eid, $data)
     {
