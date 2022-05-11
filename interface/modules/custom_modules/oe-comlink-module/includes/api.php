@@ -1,12 +1,21 @@
 <?php
 
-
+/*
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+use OpenEMR\Common\Crypto\CryptoGen;
+require_once dirname(__FILE__, 5) . "/globals.php";
 
 function curl_get_content($url, $type = "GET", $payload = '', $redirectURL = false)
 {
-    $x_username = 'sagaddis';
-    $x_password = '3d38S1^cRk@e';
-    $x_orgid = 'SGADDIS01';
+    $cryptoGen = new CryptoGen();
+    $x_username = $GLOBALS['comlink_username'];
+    $x_password = $cryptoGen->decryptStandard($GLOBALS['comlink_password']);
+    $x_orgid = $GLOBALS['comlink_xorgid'];
 
     set_time_limit(60);
     $ch = curl_init();

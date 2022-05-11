@@ -20,7 +20,7 @@ use OpenEMR\Common\Uuid\UuidRegistry;
 use OpenEMR\Validators\PatientValidator;
 use OpenEMR\Validators\ProcessingResult;
 use OpenEMR\RestControllers\EncounterRestController;
-use OpenEMR\Services\EncounterService;
+
 class PatientService extends BaseService
 {
     const TABLE_NAME = 'patient_data';
@@ -123,78 +123,84 @@ class PatientService extends BaseService
     }
     public static function getform_encounter_id()
     {
-        $rez = sqlStatement("SELECT MAX(ID) AS LastID FROM form_encounter");
+        $rez = sqlStatement("SELECT `encounter` FROM `form_encounter`ORDER BY id DESC LIMIT 1");
         return $rez;
     }
      public function insertbulkpatient($data){
 
-        $re ['numRecords']=count($data['bulkVitals']);
-        $re_in=[];
-        $re_in_total=[];
-        foreach($data['bulkVitals'] as $d){
-            $deviceid =$d['subDeviceID'];
-            $getpatientid= self::getUsernames($deviceid);
+        $re ['numRecords'] = count($data['bulkVitals']);
+        $re_in = [];
+        $re_in_total = [];
+        foreach($data['bulkVitals'] as $d) {
+            $deviceid = $d['subDeviceID'];
+            $getpatientid = self::getUsernames($deviceid);
             $pid = $getpatientid->fields['pid'];
-            $getuser_facility= self::getuser_facility();
-            $d['facility']=$getuser_facility->fields['name'];
-            $d['facility_id']=$getuser_facility->fields['facility_id'];
+            $getuser_facility = self::getuser_facility();
+            $d['facility'] = $getuser_facility->fields['name'];
+            $d['facility_id'] = $getuser_facility->fields['facility_id'];
             $getuuid= self::get_uuid($pid);
             $puuid = UuidRegistry::uuidToString($getuuid->fields['uuid']);
-            $d['sensitivity']="normal";
-            $d["onset_date"]=date('Y-m-d h:i:s');
-            $d["reason"]='Vitals';
+            $d['sensitivity'] = "normal";
+            $d["onset_date"] = date('Y-m-d h:i:s');
+            $d["reason"] = 'Vitals';
+            $d['provider_id'] = "1";
+            $b['billing_facility'] = "3";
+
             $geteid = (new EncounterRestController())->post($puuid, $d);
-            $getform_encounter_id= self::getform_encounter_id();
+            $getform_encounter_id = self::getform_encounter_id();
 
-            $d['username'] =$getuser_facility->fields['username'];
-            $d['groupname'] ='Default';
-            $d['bps']=$d['vitalsData']['ctsiSystolic'];
-            $d['bpd']=$d['vitalsData']['ctsiDiastolic'];
-            $d['weight']=$d['vitalsData']['ctsiWeight'];
-            $d['height']="";
-            $d['temperature']=$d['vitalsData']['ctsiTemperature'];
-            $d['temp_method']="";
-            $d['pulse']=$d['vitalsData']['ctsiPulse'];
-            $d['respiration']="";
-            $d['note']="";
-            $d['waist_circ']="";
-            $d['head_circ']="";
-            $d['oxygen_saturation']=$d['vitalsData']['ctsiSpo2'];
-            $d['temp_method']="Device";
+            $d['username'] = $getuser_facility->fields['username'];
+            $d['groupname'] = 'Default';
+            $d['bps'] = $d['vitalsData']['ctsiSystolic'];
+            $d['bpd'] = $d['vitalsData']['ctsiDiastolic'];
+            $d['weight'] = $d['vitalsData']['ctsiWeight'];
+            $d['height'] = "";
+            $d['temperature'] = $d['vitalsData']['ctsiTemperature'];
+            $d['temp_method'] = "";
+            $d['pulse'] = $d['vitalsData']['ctsiPulse'];
+            $d['respiration'] = "";
+            $d['note'] = "";
+            $d['waist_circ'] = "";
+            $d['head_circ'] = "";
+            $d['oxygen_saturation'] = $d['vitalsData']['ctsiSpo2'];
+            $d['temp_method'] = "Device";
 
-            $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['LastID'], $d);
-            $re_in['actionCode']='ADD';
-            $re_in['errorCode']='200';
-            $re_in['errorDesc']='Success';
-            $re_in['subEhrEmrID']=$d['subEhrEmrID'];
-            $re_in['deviceID']=$deviceid;
+            $serviceResult = $this->insertVital($pid, $getform_encounter_id->fields['encounter'], $d);
+            $re_in['actionCode'] = 'ADD';
+            $re_in['errorCode'] = '200';
+            $re_in['errorDesc'] = 'Success';
+            $re_in['subEhrEmrID'] = $d['subEhrEmrID'];
+            $re_in['deviceID'] = $deviceid;
             array_push($re_in_total,$re_in);
         }
-        $re['bulkDataResp']=$re_in_total;
+        $re['bulkDataResp'] = $re_in_total;
         echo json_encode($re);
+<<<<<<< HEAD
         
 
+=======
+>>>>>>> d0d0592d60480e392c1a834e7ecc61bf2870193a
      }
      private function insertVital($pid, $eid, $data)
     {
         $vitalSql  = " INSERT INTO form_vitals SET";
-        $vitalSql .= "     date=NOW(),";
-        $vitalSql .= "     activity=1,";
-        $vitalSql .= "     pid=?,";
-        $vitalSql .= "     bps=?,";
-        $vitalSql .= "     bpd=?,";
-        $vitalSql .= "     weight=?,";
-        $vitalSql .= "     height=?,";
-        $vitalSql .= "     temperature=?,";
-        $vitalSql .= "     temp_method=?,";
-        $vitalSql .= "     pulse=?,";
-        $vitalSql .= "     respiration=?,";
-        $vitalSql .= "     note=?,";
-        $vitalSql .= "     waist_circ=?,";
-        $vitalSql .= "     head_circ=?,";
-        $vitalSql .= "     oxygen_saturation=?,";
-        $vitalSql .= "     user=?,";
-        $vitalSql .= "     groupname=?";
+        $vitalSql .= "     date = NOW(),";
+        $vitalSql .= "     activity = 1,";
+        $vitalSql .= "     pid = ?,";
+        $vitalSql .= "     bps = ?,";
+        $vitalSql .= "     bpd = ?,";
+        $vitalSql .= "     weight = ?,";
+        $vitalSql .= "     height = ?,";
+        $vitalSql .= "     temperature = ?,";
+        $vitalSql .= "     temp_method = ?,";
+        $vitalSql .= "     pulse = ?,";
+        $vitalSql .= "     respiration = ?,";
+        $vitalSql .= "     note = ?,";
+        $vitalSql .= "     waist_circ = ?,";
+        $vitalSql .= "     head_circ = ?,";
+        $vitalSql .= "     oxygen_saturation = ?,";
+        $vitalSql .= "     user = ?,";
+        $vitalSql .= "     groupname = ?";
 
         $vitalResults = sqlInsert(
             $vitalSql,
@@ -223,15 +229,15 @@ class PatientService extends BaseService
         }
 
         $formSql = "INSERT INTO forms SET";
-        $formSql .= "     date=NOW(),";
-        $formSql .= "     encounter=?,";
-        $formSql .= "     form_name='Vitals',";
-        $formSql .= "     authorized='1',";
-        $formSql .= "     form_id=?,";
-        $formSql .= "     pid=?,";
-        $formSql .= "     user=?,";
-        $formSql .= "     groupname=?,";
-        $formSql .= "     formdir='vitals'";
+        $formSql .= "     date = NOW(),";
+        $formSql .= "     encounter = ?,";
+        $formSql .= "     form_name = 'Vitals',";
+        $formSql .= "     authorized = '1',";
+        $formSql .= "     form_id = ?,";
+        $formSql .= "     pid = ?,";
+        $formSql .= "     user = ?,";
+        $formSql .= "     groupname = ?,";
+        $formSql .= "     formdir = 'vitals'";
 
         $formResults = sqlInsert(
             $formSql,
@@ -246,6 +252,7 @@ class PatientService extends BaseService
 
         return array($vitalResults, $formResults);
     }
+
     public function insert($data)
     {
 

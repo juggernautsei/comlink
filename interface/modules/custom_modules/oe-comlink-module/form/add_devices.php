@@ -1,8 +1,17 @@
 <?php
 
+/**
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
 require_once "../../../../globals.php";
 require_once dirname(__FILE__, 2)."/controller/Container.php";
 
+use OpenEMR\Common\Uuid\UuidRegistry;
 use OpenEMR\Modules\Comlink\Container;
 use OpenEMR\Core\Header;
 use OpenEMR\Common\Csrf\CsrfUtils;
@@ -13,7 +22,9 @@ $loadDb = $container->getDatabase();
 $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
-// print_r($patient);die;
+$u = $loadDb->getUuid($_GET['pid']);
+$uuid = UuidRegistry::uuidToString($u['uuid']);
+//print_r($patients);die;
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
@@ -31,12 +42,9 @@ if($_POST){
                 $search_list[] = $row['pid'];
             }
         }
-       
+
         echo(json_encode($search_list));
     }
-
-    
-    
 
 }else{
 ?>
@@ -98,7 +106,7 @@ if($_POST){
                 <label for='form_facility'><?php echo xlt('SubEhrEmrId'); ?>:</label>
 
                 <input class='form-control' type='text' name='sub_ehr' id='sub_ehr' autocomplete="off"
-                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' required />
+                    placeholder='<?php echo xla('09HGF37-XWQ12-PANJ332'); ?>' value="<?php echo $uuid; ?>" required />
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
@@ -110,7 +118,7 @@ if($_POST){
             </div>
             <div class="col-sm form-group">
                 <div class="col-sm form-group">
-                    <label for='form_facility'><?php echo xlt('Device Model'); ?>:</label>
+                    <label for='form_facility'><?php echo xlt('Device Name'); ?>:</label>
 
                     <input class='form-control' type='text' name='device_modal' id='device_modal' autocomplete="off"
                         placeholder='<?php echo xla('Apple Watch'); ?>' required />

@@ -771,6 +771,7 @@ if ($esign->isButtonViewable()) {
 <div class='btn-group' role="group">
 <?php if (AclMain::aclCheckCore('admin', 'super')) { ?>
     <a href='#' class='btn btn-danger btn-sm btn-delete' onclick='return deleteme()'><?php echo xlt('Delete') ?></a>
+    <a href="deleteSignature.php?encounter=<?php echo $encounter ?>" target="_blank" class="btn btn-danger">unSign Document</a>
 <?php } ?>
 
 <?php if ($GLOBALS['enable_follow_up_encounters']) { ?>
@@ -778,6 +779,7 @@ if ($esign->isButtonViewable()) {
 <?php } ?>
 <button type="button" onClick="$('.collapse').collapse('hide');" class="btn btn-primary btn-sm"><?php echo xlt('Collapse All'); ?></button>
 <button type="button" onClick="$('.collapse').collapse('show');" class="btn btn-primary btn-sm"><?php echo xlt('Expand All'); ?></button>
+
 </div>
 </div>
 </div>

@@ -10,7 +10,7 @@ class Database
 
     private function createComlinkTable()
     {
-        
+
         $DBSQL_PATIENT = <<<'DB'
             CREATE TABLE IF NOT EXISTS patient_monitoring_list(
             `id`            int         NOT NULL primary key AUTO_INCREMENT comment 'Primary Key',
@@ -55,7 +55,7 @@ class Database
             PRIMARY KEY (`id`)
             ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
         DB;
-        
+
         $db = $GLOBALS['dbase'];
         $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_monitoring'");
         if (empty($exist)) {
@@ -93,7 +93,7 @@ class Database
         }
         return $facilities_list;
     }
-    
+
       /**
      * @return array
      */
@@ -118,6 +118,11 @@ class Database
         }
 
         return $providers_list;
+    }
+    public function getUuid($pid)
+    {
+        $sql = "SELECT `uuid` FROM `patient_data` WHERE `pid` = ?";
+        return sqlQuery($sql, [$pid]);
     }
 
 }

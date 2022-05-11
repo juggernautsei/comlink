@@ -7,9 +7,9 @@ $i = 0;
 $res = sqlStatement($query);
 
 while ($row = sqlFetchArray($res)) {
-    
 
-    $form_vitals = "SELECT bps,bpd,height,weight,temperature,respiration,oxygen_saturation FROM form_vitals WHERE pid=". $row['pid'];
+
+    $form_vitals = "SELECT `bps`, `bpd`, `height`, `weight`, `temperature`, `respiration`, `oxygen_saturation` FROM form_vitals WHERE `pid` = " . $row['pid'] . " ORDER BY `id` DESC";
     $form_vitalsres = sqlStatement($form_vitals);
     $form_vitalsrow = sqlFetchArray($form_vitalsres);
 
@@ -18,13 +18,13 @@ while ($row = sqlFetchArray($res)) {
 
     $facilityres = sqlStatement($facility);
     $facilityrow = sqlFetchArray($facilityres);
-   
+
 
     $query2 = "SELECT * FROM patient_data  WHERE patient_data.pid=". $row['pid'];
     $res2 = sqlStatement($query2);
 
 
-   
+
 
 
     while ($row2 = sqlFetchArray($res2)) {
@@ -39,7 +39,7 @@ while ($row = sqlFetchArray($res)) {
                 $icons='';
             }
         }
-       
+
         if( $row['alert'] == "Need Attention"){
             $alert='<div class="alert alert-danger" role="alert">'.$row['alert'].'</div>';
         }elseif( $row['alert'] == "Monitored"){
@@ -62,7 +62,7 @@ while ($row = sqlFetchArray($res)) {
             $form_vitalsrow['height'],
             $row['pain_upper'],
             $alert,
-            
+
 
         ];
         $i++;

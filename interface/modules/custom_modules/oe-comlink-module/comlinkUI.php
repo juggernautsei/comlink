@@ -1,6 +1,14 @@
 <?php
 
-require_once "../../../globals.php";
+/*
+ *  package   Comlink OpenEMR
+ *  link      http://www.open-emr.org
+ *  author    Sherwin Gaddis <sherwingaddis@gmail.com>
+ *  copyright Copyright (c )2022. Sherwin Gaddis <sherwingaddis@gmail.com>
+ *
+ */
+
+require_once dirname(__FILE__, 4) . "/globals.php";
 require_once dirname(__FILE__) . "/controller/Container.php";
 
 use OpenEMR\Modules\Comlink\Container;
@@ -190,8 +198,8 @@ use OpenEMR\Core\Header;
 
     <script>
     function add_patient() {
-        var url = 'form/add_patient.php';
-        dlgopen(url, '_blank', 620, 360, '', 'Add Patient', {
+        const url = 'form/add_patient.php';
+        dlgopen(url, '_blank', 750, 450, '', 'Add Patient', {
             onClosed: 'reload'
         });
 

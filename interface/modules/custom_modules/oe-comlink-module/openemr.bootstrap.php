@@ -1,13 +1,12 @@
 <?php
+
 /**
  *
  * link    http://www.open-emr.org
  * author  Sherwin Gaddis <sherwingaddis@gmail.com>
  * Copyright (c) 2020. Sherwin Gaddis <sherwingaddis@gmail.com>
- * license https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
- * 
- * 
- *  */
+ *
+ */
 
 use OpenEMR\Events\Globals\GlobalsInitializedEvent;
 use OpenEMR\Menu\MenuEvent;
@@ -49,4 +48,23 @@ function comlink_add_menu_item(MenuEvent $event)
  * @global                       $module          @see ModulesApplication::loadCustomModule
  */
 $eventDispatcher->addListener(MenuEvent::MENU_UPDATE, 'comlink_add_menu_item');
+
+/**
+ * @throws Exception
+ */
+function createFaxModuleGlobals(GlobalsInitializedEvent $event)
+{
+    $instructuname = xl('Enter username from comlink account.');
+    $instructupass = xl('Enter password from comlink account.');
+    $instructorgid = xl('Enter organizaion identification.');
+    $event->getGlobalsService()->createSection("Comlink Device Module", "Billing");
+    $setting = new GlobalSetting(xl('Comlink Username'), 'text', '', $instructuname);
+    $event->getGlobalsService()->appendToSection("Comlink Device Module", "comlink_username", $setting);
+    $setting = new GlobalSetting(xl('Comlink Password'), 'encrypted', '', $instructupass);
+    $event->getGlobalsService()->appendToSection("Comlink Device Module", "comlink_password", $setting);
+    $setting = new GlobalSetting(xl('Comlink Org ID'), 'text', '', $instructorgid);
+    $event->getGlobalsService()->appendToSection("Comlink Device Module", "comlink_xorgid", $setting);
+}
+
+$eventDispatcher->addListener(GlobalsInitializedEvent::EVENT_HANDLE, 'createFaxModuleGlobals');
 
