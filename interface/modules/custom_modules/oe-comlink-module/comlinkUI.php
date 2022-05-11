@@ -207,7 +207,6 @@ use OpenEMR\Core\Header;
         <a href="#" class="btn btn-secondary" onclick="bulk_upload()" style="margin-top:10px;"><i class="fa fa-plus"
                 name="bulk_upload" id="bulk_upload"><?php echo xlt(' Bulk Upload'); ?></i></a>
 
-
     </div>
     <div id="container_div" class="mt-3">
         <div class="w-100">
