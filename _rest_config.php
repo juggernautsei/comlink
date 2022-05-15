@@ -359,7 +359,7 @@ class RestConfig
         // let the capability statement for FHIR or the SMART-on-FHIR through
         if (
             $resource === ("/" . self::$SITE . "/fhir/metadata") ||
-            $resource === ("/" . self::$git add .SITE . "/fhir/.well-known/smart-configuration")||
+            $resource === ("/" . self::$SITE . "/fhir/.well-known/smart-configuration")||
             $resource === ("/" . self::$SITE . "/fhir/PatientBulkUpload")
         )
         {
