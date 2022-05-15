@@ -674,7 +674,6 @@ use OpenEMR\RestControllers\FHIR\FhirMetaDataRestController;
 
 RestConfig::$FHIR_ROUTE_MAP = array(
     "POST /fhir/metadata" => function () {
-
         $return = (new FhirMetaDataRestController())->getMetaData();
         RestConfig::apiLog($return);
         return $return;
