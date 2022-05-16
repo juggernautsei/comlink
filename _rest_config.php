@@ -361,6 +361,7 @@ class RestConfig
             $resource === ("/" . self::$SITE . "/fhir/metadata") ||
             $resource === ("/" . self::$SITE . "/fhir/.well-known/smart-configuration")||
             $resource === ("/" . self::$SITE . "/fhir/PatientBulkUpload")
+
         )
         {
             return true;
