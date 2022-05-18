@@ -299,7 +299,7 @@ $esignApi = new Api();
          * @var \Symfony\Component\EventDispatcher\EventDispatcher
          */
         $dispatcher = $GLOBALS['kernel']->getEventDispatcher();
-        $dispatcher->dispatch(new RenderEvent(), RenderEvent::EVENT_BODY_RENDER_PRE);
+        // $dispatcher->dispatch(new RenderEvent(), RenderEvent::EVENT_BODY_RENDER_PRE);
     }
     ?>
     <!-- Below iframe is to support logout, which needs to be run in an inner iframe to work as intended -->
