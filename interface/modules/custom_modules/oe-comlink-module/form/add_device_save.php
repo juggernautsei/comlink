@@ -57,12 +57,20 @@ $payload =
 $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
 $reponse = json_decode($resp);
 // print_r($reponse);die;
-if($reponse->errorCode == 200 && $reponse->errorDesc == 'OK'){
+// if($reponse->errorCode == 200 && $reponse->errorDesc == 'OK'){
   sqlQuery("INSERT INTO `patient_devices_list` (`id`, `pid`,`subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES
             ('','$pid','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')");
+$sql= "SELECT * FROM `devices_list` WHERE `subehremrid` = '$sub_ehr' and `deviceid` = '$device_id' and `devicemodal` = '$device_modal'  and `devicemaker` = '$device_maker' and `deviceos` = '$watch_os'";
+$ad= sqlQuery($sql);
+
+if($ad ==''){
+    $sql ="INSERT INTO `devices_list` (`id`, `subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES('','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')";
+    $ad= sqlQuery($sql);
+} 
+
     echo 'successfully saved device..!';
-}else{
-    echo 'Somthing Went Wrong ' . $reponse->errorDesc;
-}
+// }else{
+//     echo 'Somthing Went Wrong ' . $reponse->errorDesc;
+// }
 
 }

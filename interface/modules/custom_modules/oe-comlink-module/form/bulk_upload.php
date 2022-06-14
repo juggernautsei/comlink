@@ -14,6 +14,7 @@ $facilities = $loadDb->getFacilities();
 $providers = $loadDb->getProviders();
 $patients = $loadDb->getpatientdata();
 
+
 if($_POST){
     if($_POST['pro'] == "autocomplete"){
         $search_list = [];
@@ -25,10 +26,10 @@ if($_POST){
                 $search_list[] = $row['lname'].", ".$row['fname'];
             }
         }else{
-            $sql='SELECT `pid` FROM `patient_data`';
+            $sql='SELECT `subehremrid` FROM `patient_data`';
             $list = sqlStatement($sql);
             while ($row = sqlFetchArray($list)) {
-                $search_list[] = $row['pid'];
+                $search_list[] = $row['subehremrid'];
             }
         }
 
@@ -114,7 +115,7 @@ if($_POST){
     <form role="form" method="post" enctype="multipart/form-data" id="myform">
         <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
 
-        <input type="hidden" name="pid" id="pid" value="<?php echo $_GET['pid']; ?>" />
+
 
 
         <div class="form-row mx-8">
@@ -142,9 +143,9 @@ $('#form_save').on('click', function(event) {
 
     if (files.length > 0) {
         $('.loader').addClass(`fa fa-spinner fa-spin`);
-        var pid = $('#pid').val();
+        // var pid = $('#pid').val();
         fd.append('file', files[0]);
-        fd.append('pid', pid);
+        // fd.append('pid', pid);
         // alert(fd);
         $.ajax({
             type: 'post',

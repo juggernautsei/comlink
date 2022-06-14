@@ -16,8 +16,8 @@ while ($row = sqlFetchArray($res)) {
     $facility = "SELECT facility.name FROM facility
     INNER JOIN openemr_postcalendar_events ON facility.id = openemr_postcalendar_events.pc_eid WHERE openemr_postcalendar_events.pc_pid=". $row['pid'];
 
-    $facilityres = sqlStatement($facility);
-    $facilityrow = sqlFetchArray($facilityres);
+    $facilityres = sqlStatement($facility) ?? [];
+    $facilityrow = sqlFetchArray($facilityres) ?? [];
 
 
     $query2 = "SELECT * FROM patient_data  WHERE patient_data.pid=". $row['pid'];
@@ -51,7 +51,7 @@ while ($row = sqlFetchArray($res)) {
             '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>'.$icons,
             $row2['DOB'],
             $row['pid'],
-            $facilityrow['name']?$facilityrow['name']:0,
+            $facilityrow['name'] ?? 0,
             $form_vitalsrow['bps'].'/'.$form_vitalsrow['bpd'],
             $form_vitalsrow['temperature'],
             $row['bs_upper'],

@@ -55,6 +55,17 @@ class Database
             PRIMARY KEY (`id`)
             ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
         DB;
+        $DBSQL_DEVICELIST = <<<'DB'
+        CREATE TABLE IF NOT EXISTS `devices_list` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `subehremrid` varchar(255) DEFAULT NULL,
+            `deviceid` varchar(255) DEFAULT NULL,
+            `devicemodal` varchar(255) DEFAULT NULL,
+            `devicemaker` varchar(255) DEFAULT NULL,
+            `deviceos` varchar(255) DEFAULT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
+    DB;
 
         $db = $GLOBALS['dbase'];
         $exist = sqlQuery("SHOW TABLES FROM `$db` LIKE 'patient_monitoring'");
@@ -62,6 +73,11 @@ class Database
             sqlQuery($DBSQL_PATIENT);
             sqlQuery($DBSQL_FORM);
             sqlQuery($DBSQL_DEVICE);
+        }
+        $existDevice = sqlQuery("SHOW TABLES FROM `$db` LIKE 'devices_list'");
+        if (empty($existDevice)) {
+           
+            sqlQuery($DBSQL_DEVICELIST);
         }
 
     }
@@ -119,6 +135,29 @@ class Database
 
         return $providers_list;
     }
+    public function getpatientDevices()
+    {
+        $sql = "SELECT id,`subehremrid` FROM devices_list";
+        $list = sqlStatement($sql);
+        $providers_list = [];
+        while ($row = sqlFetchArray($list)) {
+            $providers_list[] = $row;
+        }
+
+        return $providers_list;
+    }
+    public function getpatientDevicesAll()
+    {
+        $sql = "SELECT * FROM devices_list";
+        $list = sqlStatement($sql);
+        $providers_list = [];
+        while ($row = sqlFetchArray($list)) {
+            $providers_list[] = $row;
+        }
+
+        return $providers_list;
+    }
+   
     public function getUuid($pid)
     {
         $sql = "SELECT `uuid` FROM `patient_data` WHERE `pid` = ?";
