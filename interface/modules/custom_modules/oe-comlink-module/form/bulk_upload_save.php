@@ -11,9 +11,10 @@ if (in_array($_FILES["file"]["type"], $allowedFileType)) {
         $targetPath = '../uploads/' . $_FILES['file']['name'];
         move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
         $file = fopen($targetPath, "r");
-        while (($getData = fgetcsv($file, 10000, ",")) !== FALSE) {
+        while (($getData = fgetcsv($file, 1000, ",")) !== FALSE) {
             if ($getData[0] == "subEhrEmrID") continue;
-
+           
+            
             // $pid = $getData[0];
             $sub_ehr = $getData[0];
             $device_id = $getData[1];

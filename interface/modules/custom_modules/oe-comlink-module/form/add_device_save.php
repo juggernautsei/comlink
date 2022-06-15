@@ -69,8 +69,6 @@ if($ad ==''){
 } 
 
     echo 'successfully saved device..!';
-// }else{
-//     echo 'Somthing Went Wrong ' . $reponse->errorDesc;
-// }
+
 
 }

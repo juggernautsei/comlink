@@ -169,36 +169,6 @@ $('#form_save').on('click', function(event) {
 
 });
 
-// $(function() {
-//     $('form').on('submit', function(event) {
-//         event.preventDefault();
-//         // try {
-//         // var c = $.parseJSON($('#floatingTextarea').val());
-//         $.ajax({
-//             type: 'post',
-//             url: 'bulk_upload_save.php',
-//             data: $('form').serialize(),
-//             processData: false,
-//             contentType: false,
-//             // dataType: 'json',
-//             // processData: false, // tell jQuery not to process the data
-//             // contentType: false, // tell jQuery not to set contentType
-//             error: function(xhr, status, error) {
-//                 alert(error);
-//             },
-//             success: function(results) {
-//                 alert(results);
-//                 location.reload();
-//                 dlgclose();
-//             }
-//         });
-//         // } catch (err) {
-//         //     alert('invalid json format');
-//         //     return
-//         // }
-//     });
-
-// });
 
 function autocomplete(inp, arr) {
     var currentFocus;
