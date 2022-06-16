@@ -63,6 +63,7 @@ class Database
             `devicemodal` varchar(255) DEFAULT NULL,
             `devicemaker` varchar(255) DEFAULT NULL,
             `deviceos` varchar(255) DEFAULT NULL,
+            `pid` varchar(255) DEFAULT NULL,
         PRIMARY KEY (`id`)
         ) ENGINE = InnoDB COMMENT = 'lifemesh chime sessions';
     DB;
@@ -137,7 +138,7 @@ class Database
     }
     public function getpatientDevices()
     {
-        $sql = "SELECT id,`subehremrid` FROM devices_list";
+        $sql = "SELECT id,`devicemodal`,`subehremrid` FROM devices_list WHERE pid IS NULL";
         $list = sqlStatement($sql);
         $providers_list = [];
         while ($row = sqlFetchArray($list)) {
@@ -148,7 +149,7 @@ class Database
     }
     public function getpatientDevicesAll()
     {
-        $sql = "SELECT * FROM devices_list";
+        $sql = "SELECT * FROM devices_list " ;
         $list = sqlStatement($sql);
         $providers_list = [];
         while ($row = sqlFetchArray($list)) {

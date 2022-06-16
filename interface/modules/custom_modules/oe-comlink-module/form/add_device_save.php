@@ -66,6 +66,9 @@ $ad= sqlQuery($sql);
 if($ad ==''){
     $sql ="INSERT INTO `devices_list` (`id`, `subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES('','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')";
     $ad= sqlQuery($sql);
+}else{
+    $sql ="UPDATE `devices_list` SET `pid`='$pid' WHERE `subehremrid`='$sub_ehr' and `deviceid`='$device_id' and `devicemodal` = '$device_modal'  and `devicemaker` = '$device_maker' and `deviceos` = '$watch_os'";
+    $ad= sqlQuery($sql);
 } 
 
     echo 'successfully saved device..!';
