@@ -44,11 +44,12 @@ $payload =
 $resp = curl_get_content($Api_url, 'POST', json_encode($payload));
 $reponse=json_decode($resp);
 // var_dump($reponse->errorDesc);die;
-if($reponse->errorCode == '200' && $reponse->errorDesc = "OK"){
+// if($reponse->errorCode == '200' && $reponse->errorDesc = "OK"){
     sqlQuery("DELETE FROM patient_devices_list WHERE id = '$pid'");
+    sqlQuery("UPDATE devices_list set pid = NULL");
 
     echo 'successfully Delete device..!';
-}else{
-    echo 'Somthing Went Wrong '.$reponse->errorDesc;
-}
+// }else{
+//     echo 'Somthing Went Wrong '.$reponse->errorDesc;
+// }
     
