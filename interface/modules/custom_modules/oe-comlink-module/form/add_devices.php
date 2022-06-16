@@ -111,7 +111,7 @@ if ($_POST) {
                         <option value="0" selected>Select One</option>
                         <?php foreach ($patient_devices_list as $patient_devices) {
 
-                            echo ' <option value="' . $patient_devices['id'] . '"> ' . $patient_devices['subehremrid'] . ' </option>';
+                            echo ' <option value="' . $patient_devices['id'] . '"> ' . $patient_devices['subehremrid'] . ' ' . $patient_devices['devicemodal'] . '</option>';
                         }
 
                         ?>
