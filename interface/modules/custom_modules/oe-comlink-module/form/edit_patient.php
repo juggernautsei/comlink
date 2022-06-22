@@ -262,7 +262,7 @@ $providers = $loadDb->getProviders();
 function add_device() {
     var pid = $('#pid').val();
     var url = 'add_devices.php?pid=' + pid;
-    dlgopen(url, '_blank', 620, 360, '', 'Add Device', {
+    dlgopen(url, '_blank', 620, 460, '', 'Add Device', {
         onClosed: 'reload'
     });
 
@@ -271,7 +271,7 @@ function add_device() {
 function bulk_upload() {
     var pid = $('#pid').val();
     var url = 'bulk_upload.php?pid=' + pid;
-    dlgopen(url, '_blank', 620, 360, '', 'Bulk Upload Devices', {
+    dlgopen(url, '_blank', 620, 460, '', 'Bulk Upload Devices', {
         onClosed: 'reload'
     });
 
