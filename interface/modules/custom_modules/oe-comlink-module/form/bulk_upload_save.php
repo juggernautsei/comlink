@@ -13,8 +13,7 @@ if (in_array($_FILES["file"]["type"], $allowedFileType)) {
         $file = fopen($targetPath, "r");
         while (($getData = fgetcsv($file, 1000, ",")) !== FALSE) {
             if ($getData[0] == "subEhrEmrID") continue;
-           
-            
+
             // $pid = $getData[0];
             $sub_ehr = $getData[0];
             $device_id = $getData[1];
@@ -27,11 +26,11 @@ if (in_array($_FILES["file"]["type"], $allowedFileType)) {
             $sql= "SELECT * FROM `devices_list` WHERE `subehremrid` = '$sub_ehr' and `deviceid` = '$device_id' and `devicemodal` = '$device_modal'  and `devicemaker` = '$device_maker' and `deviceos` = '$watch_os'";
             $ad= sqlQuery($sql);
 
-            if($ad ==''){
+            if($ad == ''){
                 $sql ="INSERT INTO `devices_list` (`id`, `subehremrid`,`deviceid`,`devicemodal`, `devicemaker`, `deviceos`) VALUES('','$sub_ehr','$device_id','$device_modal','$device_maker','$watch_os')";
                 $ad= sqlQuery($sql);
-            } 
-          
+            }
+
         }
         echo "successfully uploaded !!!!";
     }

@@ -22,7 +22,7 @@ $providers = $loadDb->getProviders();
     <script>
     function sel_patient() {
         let title = '<?php echo xlt('Patient Search'); ?>';
-        dlgopen('<? echo dirname(__FILE__, 5) ?>\main\calendar\find_patient_popup.php', '_blank', 650, 300, '', title);
+        dlgopen('<? echo dirname(__FILE__, 5) ?>\main\calendar\find_patient_popup.php', '_blank', 650, 400, '', title);
     }
     </script>
     <style type="text/css">
@@ -79,24 +79,24 @@ $providers = $loadDb->getProviders();
                 <div class="col-sm form-group">
                     <label for='form_facility'><?php echo xlt('Facility'); ?>:</label>
                     <select class='form-control' name='facility' id='facility'>
-                        <?php 
+                        <?php
                     foreach($facilities as $facility) {
                         echo "<option value='".$facility['id']."'>".$facility['name']."</option>";
-                    }              
+                    }
                     ?>
                     </select>
                 </div>
                 <div class="col-sm form-group">
                     <label for='form_title'><?php echo xlt('Provider'); ?>:</label>
                     <select class='form-control' name='provider' id='provider'>
-                        <?php 
+                        <?php
                     foreach($providers as $provider) {
                         if($provider['fname']){
                             echo "<option value='".$provider['id']."'>".$provider['lname'].", ".$provider['fname']."</option>";
                         }else{
                             echo "<option value='".$provider['id']."'>".$provider['lname']."</option>";
-                        }   
-                    }              
+                        }
+                    }
                     ?>
                     </select>
                 </div>
@@ -107,7 +107,7 @@ $providers = $loadDb->getProviders();
         $list = sqlStatement($sql);
         $form_vitals = "SELECT bps,bpd,height,weight,temperature,respiration,oxygen_saturation FROM form_vitals WHERE pid=".$id;
         $form_vitalsres = sqlStatement($form_vitals);
-        $form_vitalsrow = sqlFetchArray($form_vitalsres);            
+        $form_vitalsrow = sqlFetchArray($form_vitalsres);
         while ($row = sqlFetchArray($list)) {
 
 
