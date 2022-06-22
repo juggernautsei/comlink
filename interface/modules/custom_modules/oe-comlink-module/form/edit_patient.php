@@ -250,7 +250,7 @@ $providers = $loadDb->getProviders();
                 <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type="button" name="list_device"
                     id="list_device" value="List All Devices" onclick="listdevice()">
                 <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type="button" id="cancel"
-                    onclick="goBack()" value="Cancel">
+                    onclick="goBack()" value="Return to Patient">
             </div>
 
         </form>
