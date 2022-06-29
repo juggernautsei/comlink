@@ -150,7 +150,7 @@ if ($_POST) {
         </div>
         <div class="col-sm form-group">
             <div class="col-sm form-group">
-                <label for='form_facility'><?php echo xlt('Blood Pressure'); ?>:</label>
+                <label for='form_facility'><?php echo xlt('Blood Pressure Upper Limit'); ?>:</label>
 
                 <input class='form-control' type='text' name='bp_upper' id='bp_upper' autocomplete="off" placeholder='<?php echo xla('Enter Blood Pressure'); ?>'/>
             </div>
@@ -159,7 +159,7 @@ if ($_POST) {
 
     <div class="form-row mx-2">
         <div class="col-sm form-group">
-            <label for='form_facility'><?php echo xlt('Blood Pressure Lower'); ?>:</label>
+            <label for='form_facility'><?php echo xlt('Blood Pressure Lower Limit'); ?>:</label>
 
             <input class='form-control' type='text' name='bp_lower' id='bp_lower' autocomplete="off"
 

@@ -40,19 +40,22 @@ while ($row = sqlFetchArray($res)) {
             }
         }
 
-        if( $row['alert'] == "Need Attention"){
-            $alert='<div class="alert alert-danger" role="alert">'.$row['alert'].'</div>';
-        }elseif( $row['alert'] == "Monitored"){
-            $alert='<div class="alert alert-info" role="alert">'.$row['alert'].'</div>';
-        }else{
+        if ($row['alert'] == "Need Attention") {
+            $alert = '<div class="alert alert-danger" role="alert">' . $row['alert'] . '</div>';
+        } elseif ( $row['alert'] == "Monitored") {
+            $alert = '<div class="alert alert-info" role="alert">'.$row['alert'] . '</div>';
+        } elseif  ($form_vitalsrow['bps'] > $row['bs_upper']) {
+            $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
+        } else {
             $alert='';
         }
+
         $dataarray['data'][$i] =  [
             '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>'.$icons,
             $row2['DOB'],
             $row['pid'],
             $facilityrow['name'] ?? 0,
-            $form_vitalsrow['bps'].'/'.$form_vitalsrow['bpd'],
+            $form_vitalsrow['bps'] . '/' . $form_vitalsrow['bpd'],
             $form_vitalsrow['temperature'],
             $row['bs_upper'],
             $form_vitalsrow['respiration'],
