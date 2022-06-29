@@ -46,6 +46,8 @@ while ($row = sqlFetchArray($res)) {
             $alert = '<div class="alert alert-info" role="alert">'.$row['alert'] . '</div>';
         } elseif  ($form_vitalsrow['bps'] > $row['bs_upper']) {
             $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
+        }  elseif  ($form_vitalsrow['bpd'] > $row['bs_lower']) {
+            $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
         } else {
             $alert='';
         }
