@@ -40,14 +40,21 @@ while ($row = sqlFetchArray($res)) {
             }
         }
 
-        $bpUpper = explode("/", $row['bp_upper']);
-        $bpLower = explode("/", $row['bp_lower']);
 
-        if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
-            $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
-        } elseif (($form_vitalsrow['bps'] < $bpLower[0]) || ($form_vitalsrow['bpd'] < $bpLower[1]) ) {
-            $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
-        } elseif  ($row['alert'] == "Need Attention") {
+        //automatically set if range is set
+        if (!empty($row['bp_upper']) && !empty($row['bp_lower'])) {
+
+            $bpUpper = explode("/", $row['bp_upper']);
+            $bpLower = explode("/", $row['bp_lower']);
+
+            if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
+                $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
+            } elseif (($form_vitalsrow['bps'] < $bpLower[0]) || ($form_vitalsrow['bpd'] < $bpLower[1])) {
+                $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
+            }
+        }
+        //Manually set
+        if  ($row['alert'] == "Need Attention") {
             $alert = '<div class="alert alert-info" role="alert">'.$row['alert'] . '</div>';
         }  elseif  ( $row['alert'] == "Monitored") {
             $alert = '<div class="alert alert-danger" role="alert">' . $row['alert'] . '</div>';
