@@ -43,9 +43,9 @@ while ($row = sqlFetchArray($res)) {
         $bpUpper = explode("/", $row['bp_upper']);
         $bpLower = explode("/", $row['bp_lower']);
 
-        if (($form_vitalsrow['bpd'] > $bpUpper[0]) || ($form_vitalsrow['bps'] > $bpUpper[1])) {
+        if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
             $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
-        } elseif (($form_vitalsrow['bpd'] < $bpLower[0]) || ($form_vitalsrow['bps'] < $bpLower[1]) ) {
+        } elseif (($form_vitalsrow['bps'] < $bpLower[0]) || ($form_vitalsrow['bpd'] < $bpLower[1]) ) {
             $alert = '<div class="alert alert-info" role="alert"> Needs Attention </div>';
         } elseif  ($row['alert'] == "Need Attention") {
             $alert = '<div class="alert alert-info" role="alert">'.$row['alert'] . '</div>';
