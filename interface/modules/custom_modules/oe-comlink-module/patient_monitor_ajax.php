@@ -67,7 +67,7 @@ while ($row = sqlFetchArray($res)) {
             $row2['DOB'],
             $row['pid'],
             $facilityrow['name'] ?? 0,
-            $form_vitalsrow['bps'] . '/' . $form_vitalsrow['bpd'] . " " . $row['bp_upper'] . " " . $row['bp_lower'],
+            $form_vitalsrow['bps'] . '/' . $form_vitalsrow['bpd'],
             $form_vitalsrow['temperature'],
             $row['bs_upper'],
             $form_vitalsrow['respiration'],
