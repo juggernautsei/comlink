@@ -14,13 +14,13 @@ while ($row = sqlFetchArray($res)) {
     $form_vitalsrow = sqlFetchArray($form_vitalsres);
 
     $facility = "SELECT facility.name FROM facility
-    INNER JOIN openemr_postcalendar_events ON facility.id = openemr_postcalendar_events.pc_eid WHERE openemr_postcalendar_events.pc_pid=". $row['pid'];
+    INNER JOIN openemr_postcalendar_events ON facility.id = openemr_postcalendar_events.pc_facility WHERE openemr_postcalendar_events.pc_pid = ?";
 
-    $facilityres = sqlStatement($facility) ?? [];
+    $facilityres = sqlStatement($facility, [$row['pid']]) ?? [];
     $facilityrow = sqlFetchArray($facilityres) ?? [];
 
 
-    $query2 = "SELECT * FROM patient_data  WHERE patient_data.pid=". $row['pid'];
+    $query2 = "SELECT * FROM patient_data  WHERE patient_data.pid = " . $row['pid'];
     $res2 = sqlStatement($query2);
 
 
@@ -29,14 +29,14 @@ while ($row = sqlFetchArray($res)) {
 
     while ($row2 = sqlFetchArray($res2)) {
 
-        $device_vitals = "SELECT count(*) FROM patient_devices_list WHERE pid=". $row['pid'];
+        $device_vitals = "SELECT count(*) FROM patient_devices_list WHERE pid=" . $row['pid'];
         $device_vitalsres = sqlStatement($device_vitals);
         $device_vitalsrow = sqlFetchArray($device_vitalsres);
-        if(!empty($device_vitalsrow)){
-            if($device_vitalsrow['count(*)'] > 0){
-                $icons='<a href="form/list_device.php?pid='.$row['pid'].'"><i class="material-icons" style="color:blue">ad_units</i></a>';
-            }else{
-                $icons='';
+        if (!empty($device_vitalsrow)) {
+            if ($device_vitalsrow['count(*)'] > 0) {
+                $icons='<a href="form/list_device.php?pid=' . $row['pid'] . '"><i class="material-icons" style="color:blue">ad_units</i></a>';
+            } else {
+                $icons = '';
             }
         }
 
@@ -48,7 +48,7 @@ while ($row = sqlFetchArray($res)) {
             $bpLower = explode("/", $row['bp_lower']);
 
             if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
-                if (($bpUpper[0] !== 0) || ($bpUpper[0] != '')) {
+                if (($bpUpper[0] == 0) || ($bpUpper[0] == '')) {
                     $limit = '';
                     $limit = '<br>BP limits not set';
                 }
