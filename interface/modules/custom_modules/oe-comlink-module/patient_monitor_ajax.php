@@ -48,7 +48,7 @@ while ($row = sqlFetchArray($res)) {
             $bpLower = explode("/", $row['bp_lower']);
 
             if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
-                if (($bpUpper[0] === 0) || ($bpUpper[0] == '')) {
+                if (($bpUpper[0] !== 0) || ($bpUpper[0] != '')) {
                     $limit = '';
                     $limit = '<br>BP limits not set';
                 }
