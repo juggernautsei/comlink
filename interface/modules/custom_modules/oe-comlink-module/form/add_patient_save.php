@@ -44,7 +44,7 @@ if($count['COUNT(*)'] > 0){
     echo "Patient Already Exist !!!";
 
 }else{
-    $sql = "INSERT INTO `patient_monitoring_form` (`id`,
+    $sql = "REPLACE INTO `patient_monitoring_form` (`id`,
                                        `pid`,
                                        `facility`,
                                        `provider`,

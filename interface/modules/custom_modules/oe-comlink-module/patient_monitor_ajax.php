@@ -56,7 +56,7 @@ while ($row = sqlFetchArray($res)) {
         }
 
         $dataarray['data'][$i] =  [
-            '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>'.$icons,
+            '<a href=form/edit_patient.php?pid=' . $row['pid'] . '>' . $row2['fname'] . $row2['lname'] . $row2['mname'] . '</a>' . $icons,
             $row2['DOB'],
             $row['pid'],
             $facilityrow['name'] ?? 0,
