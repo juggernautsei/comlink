@@ -48,9 +48,9 @@ while ($row = sqlFetchArray($res)) {
             $bpLower = explode("/", $row['bp_lower']);
 
             if (($form_vitalsrow['bps'] > $bpUpper[0]) || ($form_vitalsrow['bpd'] > $bpUpper[1])) {
-                if ($bpUpper[0] == 0) {
+                if (($bpUpper[0] === 0) || ($bpUpper[0] == '')) {
                     $limit = '';
-                    $limit = 'BP limits not set';
+                    $limit = '<br>BP limits not set';
                 }
                 $alert = '<div class="alert alert-info" role="alert"> Needs Attention ' . $limit . '</div>';
             } elseif (($form_vitalsrow['bps'] < $bpLower[0]) || ($form_vitalsrow['bpd'] < $bpLower[1])) {
