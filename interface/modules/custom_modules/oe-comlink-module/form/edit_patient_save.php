@@ -53,7 +53,7 @@ sqlQuery("UPDATE patient_monitoring_form SET
                                    oxy_lower = $oxy_lower,
                                    pain_upper = $pain_upper,
                                    pain_lower = $pain_lower,
-                                   alert = $active WHERE pid = ?",  [$pid]);
+                                   alert = '$active' WHERE pid = ?",  [$pid]);
 
 $form_vitals = sqlQuery("SELECT COUNT(*) FROM openemr_postcalendar_events WHERE  pc_pid =".$pid);
 
